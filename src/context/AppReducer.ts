@@ -9,8 +9,12 @@ export const appReducerFunction = (
       const {
         payload: { token = "" },
       } = action;
-      localStorage.setItem("token", token);
       return { ...state, isUserLoggedIN: true, token };
+    case "PROFILE":
+      const {
+        payload: { user = {} as User },
+      } = action;
+      return { ...state, user };
     case "LOGOUT":
       localStorage.removeItem("token");
       return { ...state, isUserLoggedIN: false, user: {} as User };

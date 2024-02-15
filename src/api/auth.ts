@@ -22,6 +22,7 @@ export const useLogin = () => {
   useEffect(() => {
     if (isLoading) return;
     if (!hasError && data?.token) {
+      localStorage.setItem("token", data.token);
       dispatch(loginDispatchAction(data.token));
     }
   }, [data, hasError, error, isLoading, dispatch]);
@@ -47,6 +48,7 @@ export const useSignUp = () => {
   useEffect(() => {
     if (isLoading) return;
     if (!hasError && data?.token) {
+      localStorage.setItem("token", data.token);
       dispatch(loginDispatchAction(data.token));
     }
   }, [data, hasError, error, isLoading, dispatch]);

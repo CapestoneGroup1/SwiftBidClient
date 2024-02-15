@@ -1,10 +1,19 @@
-import { AppDispatchAction } from "../utils/types";
+import { AppDispatchAction, User } from "../utils/types";
 
 export const loginDispatchAction = (token: string): AppDispatchAction => {
   return {
     type: "LOGIN",
     payload: {
       token,
+    },
+  };
+};
+
+export const profileDispatchAction = (user: User): AppDispatchAction => {
+  return {
+    type: "PROFILE",
+    payload: {
+      user,
     },
   };
 };

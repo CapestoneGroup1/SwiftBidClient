@@ -11,5 +11,6 @@ export const env = {
     signup: "/auth/signup",
     forgotpassword: "/auth/forgotpassword",
     resetpassword: "/auth/resetpassword",
+    profile: "/user/profile"
   },
 };
