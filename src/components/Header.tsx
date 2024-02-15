@@ -5,7 +5,7 @@ import { useAppContext } from "./AppWrapper";
 import { env } from "../utils/env";
 
 function Header() {
-  const { dispatch, isUserLoggedIN } = useAppContext();
+  const { dispatch, isUserLoggedIN, user } = useAppContext();
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
@@ -22,9 +22,12 @@ function Header() {
             </Nav>
           )}
           {isUserLoggedIN && (
-            <Nav>
-              <Nav.Link href={env.routes.logout}>Logout</Nav.Link>
-            </Nav>
+            <>
+              <span>{user.email}</span> &nbsp;
+              <Nav>
+                <Nav.Link href={env.routes.logout}>Logout</Nav.Link>
+              </Nav>
+            </>
           )}
         </Navbar.Collapse>
       </Container>
