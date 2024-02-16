@@ -22,7 +22,6 @@ export default function AppInitialisations(props: {
           env.api.profile
         );
         if (response.status === 200) {
-          dispatch(loginDispatchAction(tokenValue));
           dispatch(profileDispatchAction(response.data));
         }
       } catch (error) {
@@ -37,6 +36,7 @@ export default function AppInitialisations(props: {
     if (!tokenValue) {
       return dispatch(logoutDispatchAction());
     }
+    dispatch(loginDispatchAction(tokenValue));
     getUserProfile(tokenValue);
   }, [dispatch, token]);
 
