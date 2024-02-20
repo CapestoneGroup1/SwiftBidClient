@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { useLogin } from "../../api/auth";
 import { env } from "../../utils/env";
 import { Col, Container, Row, Stack } from "react-bootstrap";
+import "./login.css"; // Import the CSS file
 
 export default function Login() {
   const [state, setState] = useState({
@@ -29,45 +30,54 @@ export default function Login() {
   };
 
   return (
-    <Container>
-      <Row className="d-flex justify-content-center align-items-center vh-100">
-        <Col xs={12} md={6}>
-          logo
-        </Col>
-        <Col xs={12} md={6}>
-          <form onSubmit={submitLoginForm}>
-            <Stack gap={3}>
-              {hasError && error?.error && (
-                <div className="error">
-                  {error?.error || "Internal Server Error!!!"}
-                </div>
-              )}
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={onChange}
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={onChange}
-                maxLength={8}
-                required
-              />
-              <input type="submit" value="Login" />
-              <div className="d-flex justify-content-center">
-                <a href={env.routes.forgotpassword}>Forgot Password?</a>
-              </div>
-              <div className="d-flex justify-content-center">
-                <a href={env.routes.signup}>Create an account</a>
-              </div>
-            </Stack>
-          </form>
-        </Col>
-      </Row>
-    </Container>
+    <div className="login-container">
+      <Container>
+        <div className="login-form">
+          <Row className="justify-content-center align-items-center">
+            {/* Image column */}
+            <Col xs={12} md={6} className="image-column">
+              <img src="/logo.png" alt="Login" className="img-fluid" />
+            </Col>
+            {/* Login form column */}
+            <Col xs={12} md={6} className="login-form-column">
+              <h1 className="text-center">Login</h1>
+              <form onSubmit={submitLoginForm}>
+                <Stack gap={3}>
+                  {hasError && error?.error && (
+                    <div className="error">
+                      {error?.error || "Internal Server Error!!!"}
+                    </div>
+                  )}
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={onChange}
+                    required
+                    className="form-input"
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={onChange}
+                    maxLength={8}
+                    required
+                    className="form-input"
+                  />
+                  <input type="submit" value="Login" className="btn-login" />
+                  <div className="d-flex justify-content-center forgotpass">
+                    <a href={env.routes.forgotpassword}>Forgot Password?</a>
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <a href={env.routes.signup}>Create an account</a>
+                  </div>
+                </Stack>
+              </form>
+            </Col>
+          </Row>
+        </div>
+      </Container>
+    </div>
   );
 }
