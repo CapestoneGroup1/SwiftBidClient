@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "../login/Login";
-import SignUp from "../signup/SignUp";
 import Home from "../Home/Home";
 import { env } from "../../utils/env";
-import ForgotPassword from "../forgotpassword/ForgotPassword";
 import HideIfLoggedIN from "../../components/HideIfLoggedIN";
+import Login from "../login/Login";
+import Signup from "../signup/SignUp";
+import ForgotPassword from "../forgotpassword/ForgotPassword";
 import Logout from "../login/Logout";
 
 export default function AppRoutes() {
@@ -19,7 +19,7 @@ export default function AppRoutes() {
         />
         <Route
           path={env.routes.signup}
-          element={<HideIfLoggedIN element={<SignUp />} />}
+          element={<HideIfLoggedIN element={<Signup />} />}
         />
         <Route
           path={env.routes.forgotpassword}
