@@ -1,15 +1,16 @@
 import { ChangeEvent, useState } from "react";
-import { useLogin } from "../../api/auth";
+import { useSignUp } from "../../api/auth";
 import { env } from "../../utils/env";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import "./signup.css"; // Import the CSS file
 
-export default function Login() {
+export default function Signup() {
   const [state, setState] = useState({
     email: "",
     password: "",
+    username: ""
   });
-  const { postData, hasError, error, isLoading } = useLogin();
+  const { postData, hasError, error, isLoading } = useSignUp();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,10 +23,11 @@ export default function Login() {
   const submitLoginForm = (e: any) => {
     if (isLoading) return;
     e.preventDefault();
-    const { email, password } = state;
+    const { email, password, username } = state;
     postData({
       email,
       password,
+      username
     });
   };
 
@@ -45,7 +47,7 @@ export default function Login() {
               <form onSubmit={submitLoginForm}>
                 <Stack gap={3}>
                   {hasError && error?.error && (
-                    <div className="error">
+                    <div className="alert alert-danger error">
                       {error?.error || "Internal Server Error!!!"}
                     </div>
                   )}

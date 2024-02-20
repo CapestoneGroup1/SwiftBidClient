@@ -13,7 +13,7 @@ function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Products</Nav.Link>
+            <Nav.Link href="/"></Nav.Link>
           </Nav>
           {!isUserLoggedIN && (
             <Nav>

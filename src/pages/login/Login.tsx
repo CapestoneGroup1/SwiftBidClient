@@ -44,7 +44,7 @@ export default function Login() {
               <form onSubmit={submitLoginForm}>
                 <Stack gap={3}>
                   {hasError && error?.error && (
-                    <div className="error">
+                    <div className="alert alert-danger error">
                       {error?.error || "Internal Server Error!!!"}
                     </div>
                   )}
