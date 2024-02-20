@@ -82,7 +82,7 @@ export default function ForgotPassword() {
                   <form onSubmit={submitSendOtp}>
                     <Stack gap={3}>
                       {hasError && error?.error && (
-                        <div className="error">
+                        <div className="alert alert-danger error">
                           {error?.error || "Internal Server Error!!!"}
                         </div>
                       )}
@@ -105,7 +105,7 @@ export default function ForgotPassword() {
                   <form onSubmit={submitResetPassword}>
                     <Stack gap={3}>
                       {resetError && resetErrorData?.error && (
-                        <div className="error">
+                        <div className="alert alert-danger error">
                           {resetErrorData?.error || "Internal Server Error!!!"}
                         </div>
                       )}
