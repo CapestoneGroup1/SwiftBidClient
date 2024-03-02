@@ -7,6 +7,8 @@ import Login from "../login/Login";
 import Signup from "../signup/SignUp";
 import ForgotPassword from "../forgotpassword/ForgotPassword";
 import Logout from "../login/Logout";
+import PendingApprovals from "../Admin/PendingApprovals";
+import RoleBasedAccess from "../../components/RoleBasedAccess";
 
 export default function AppRoutes() {
   return (
@@ -28,6 +30,10 @@ export default function AppRoutes() {
         <Route
           path={env.routes.logout}
           element={<Logout/>}
+        />
+         <Route
+          path={env.routes.admin}
+          element={<RoleBasedAccess element={<PendingApprovals/>}/>}
         />
       </Routes>
     </>

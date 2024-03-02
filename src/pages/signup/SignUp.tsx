@@ -56,7 +56,6 @@ export default function Signup() {
                       name="username"
                       placeholder="UserName"
                       onChange={onChange}
-                      maxLength={10}
                       required
                     className="form-input"
 
@@ -75,7 +74,6 @@ export default function Signup() {
                       name="password"
                       placeholder="Password"
                       onChange={onChange}
-                      maxLength={8}
                       required
                     className="form-input"
                     />

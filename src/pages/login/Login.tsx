@@ -61,7 +61,6 @@ export default function Login() {
                     name="password"
                     placeholder="Password"
                     onChange={onChange}
-                    maxLength={8}
                     required
                     className="form-input"
                   />

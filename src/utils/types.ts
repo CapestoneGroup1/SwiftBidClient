@@ -5,6 +5,7 @@ export type AppWrapperProps = {
 };
 
 export type User = {
+  id: string;
   username: string;
   email: string;
   mobile: string;
@@ -41,3 +42,8 @@ export interface AppContext extends AppContextState {
 export type ErrorResponse = {
   error: string;
 };
+
+export type Category = {
+  _id: string,
+  name: string
+}

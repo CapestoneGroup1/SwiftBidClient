@@ -5,12 +5,17 @@ export const env = {
     signup: "/signup",
     forgotpassword: "/forgotpassword",
     logout: "/logout",
+    admin: "admin/",
+    home: "/",
   },
   api: {
     login: "/auth/login",
     signup: "/auth/signup",
     forgotpassword: "/auth/forgotpassword",
     resetpassword: "/auth/resetpassword",
-    profile: "/user/profile"
+    profile: "/user/profile",
+    pendingapprovals: "/product/pendingapproval",
+    approveproduct: "/product/approveproduct",
+    rejectproduct: "/product/rejectproduct",
   },
 };

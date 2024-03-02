@@ -3,18 +3,22 @@ import APIService from "../services/Api";
 import { ErrorResponse } from "../utils/types";
 import { AxiosError } from "axios";
 
-export const useFetch = (url: string, skip = false) => {
-  const [data, setData] = useState(null);
+export const useFetch = <TData>(url: string, skip = false) => {
+  const [data, setData] = useState<TData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState<ErrorResponse | null>(null);
+  const [reFetchCount, reFetch] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (skip) return;
+      if (skip || !url) return;
       setIsLoading(true);
+      setData(null);
+      setHasError(false);
+      setError(null);
       try {
-        const response = await APIService.getInstance().get(url);
+        const response = await APIService.getInstance().get<TData>(url);
         if (`${response.status}`.startsWith("2")) {
           setData(response.data);
           setHasError(false);
@@ -32,7 +36,7 @@ export const useFetch = (url: string, skip = false) => {
       }
     };
     fetchData();
-  }, []);
-  return { data, isLoading, hasError, error };
+  }, [skip, url, reFetchCount]);
+  return { data, isLoading, hasError, error, refetch: () => reFetch(count => count + 1) };
 };
 export default useFetch;

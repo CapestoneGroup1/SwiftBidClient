@@ -32,7 +32,7 @@ export default class APIService {
           return Promise.reject(error);
         } else if (error.response?.status === 401) {
           localStorage.removeItem("token");
-          window.location.reload();
+          window.location.href ="/login";
         }
         return Promise.reject(error);
       }
