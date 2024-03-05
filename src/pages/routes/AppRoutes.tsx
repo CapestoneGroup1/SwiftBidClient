@@ -9,6 +9,8 @@ import ForgotPassword from "../forgotpassword/ForgotPassword";
 import Logout from "../login/Logout";
 import PendingApprovals from "../Admin/PendingApprovals";
 import RoleBasedAccess from "../../components/RoleBasedAccess";
+import AddProduct from "../AddProduct/AddProduct";
+import ShowIfLoggedIn from "../../components/ShowIfLoggedIn";
 
 export default function AppRoutes() {
   return (
@@ -27,13 +29,14 @@ export default function AppRoutes() {
           path={env.routes.forgotpassword}
           element={<HideIfLoggedIN element={<ForgotPassword />} />}
         />
+        <Route path={env.routes.logout} element={<Logout />} />
         <Route
-          path={env.routes.logout}
-          element={<Logout/>}
-        />
-         <Route
           path={env.routes.admin}
-          element={<RoleBasedAccess element={<PendingApprovals/>}/>}
+          element={<RoleBasedAccess element={<PendingApprovals />} />}
+        />
+        <Route
+          path={env.routes.addproduct}
+          element={<ShowIfLoggedIn element={<AddProduct />} />}
         />
       </Routes>
     </>

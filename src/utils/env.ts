@@ -7,6 +7,7 @@ export const env = {
     logout: "/logout",
     admin: "admin/",
     home: "/",
+    addproduct: "/addproduct"
   },
   api: {
     login: "/auth/login",
@@ -17,5 +18,7 @@ export const env = {
     pendingapprovals: "/product/pendingapproval",
     approveproduct: "/product/approveproduct",
     rejectproduct: "/product/rejectproduct",
+    categories: "/category",
+    addproduct: "/product/add"
   },
 };

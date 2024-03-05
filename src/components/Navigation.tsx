@@ -43,7 +43,7 @@ export default function Navigation() {
                 <ListItemText primary={"MY PRODUCTS"} />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding onClick={() => navigate(env.routes.home)}>
+            <ListItem disablePadding onClick={() => navigate(env.routes.addproduct)}>
               <ListItemButton>
                 <ListItemText primary={"ADD PRODUCT"} />
               </ListItemButton>

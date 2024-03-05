@@ -47,3 +47,13 @@ export type Category = {
   _id: string,
   name: string
 }
+export type ProductDetails = {
+  _id: string;
+  name: string;
+  description: string;
+  price: string;
+  imageurl: string;
+  category: string;
+  userid: string;
+  adminapproval: "APPROVED" | "PENDING" | "REJECTED";
+};
