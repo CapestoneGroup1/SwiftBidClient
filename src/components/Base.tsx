@@ -42,8 +42,8 @@ export default function Base(props: { children: React.ReactNode }) {
 
   return (
     <div>
-      <AppBar position="fixed">
-        <Toolbar>
+      <AppBar position="relative">
+        <Toolbar style={{backgroundColor: '#3363ff'}}>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
             SwiftBid
           </Typography>
