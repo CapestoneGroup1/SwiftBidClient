@@ -11,6 +11,7 @@ import PendingApprovals from "../Admin/PendingApprovals";
 import RoleBasedAccess from "../../components/RoleBasedAccess";
 import AddProduct from "../AddProduct/AddProduct";
 import ShowIfLoggedIn from "../../components/ShowIfLoggedIn";
+import CategoriesList from "../Admin/CategoriesList";
 
 export default function AppRoutes() {
   return (
@@ -37,6 +38,10 @@ export default function AppRoutes() {
         <Route
           path={env.routes.addproduct}
           element={<ShowIfLoggedIn element={<AddProduct />} />}
+        />
+        <Route
+          path={env.routes.categories}
+          element={<RoleBasedAccess element={<CategoriesList />} />}
         />
       </Routes>
     </>

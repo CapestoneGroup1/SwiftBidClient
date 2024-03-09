@@ -73,6 +73,11 @@ export default function Navigation() {
                 <ListItemText primary={"PENDING APPROVALS"} />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate(env.routes.categories)}>
+                <ListItemText primary={"ADD/EDIT CATEGORIES"} />
+              </ListItemButton>
+            </ListItem>
           </>
         )}
 

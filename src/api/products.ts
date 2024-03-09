@@ -33,3 +33,48 @@ export const useAddNewProduct = (successCallback: Function) => {
 
   return { data, error, hasError, isLoading, postData };
 };
+
+export const useAddNewCategory = (successCallback: Function) => {
+  const {
+    data,
+    error: errorMessage,
+    hasError,
+    isLoading,
+    postData,
+  } = useCustomMutation<{ name: string }, Category>(env.api.addcategory);
+  const { success, error } = useCustomNotifications();
+
+  useEffect(() => {
+    if (data && data._id) {
+      success("Category Added Success");
+      successCallback && successCallback();
+    } else if (hasError) {
+      error(errorMessage?.error || "Failed to Add Category");
+    }
+  }, [data]);
+
+  return { data, error, hasError, isLoading, postData };
+};
+
+
+export const useEditCategory = (successCallback: Function) => {
+  const {
+    data,
+    error: errorMessage,
+    hasError,
+    isLoading,
+    postData,
+  } = useCustomMutation<{ name: string, id: string }, Category>(env.api.editcategory);
+  const { success, error } = useCustomNotifications();
+
+  useEffect(() => {
+    if (data && data._id) {
+      success("Category Edited Success");
+      successCallback && successCallback();
+    } else if (hasError) {
+      error(errorMessage?.error || "Failed to Edit Category");
+    }
+  }, [data]);
+
+  return { data, error, hasError, isLoading, postData };
+};
