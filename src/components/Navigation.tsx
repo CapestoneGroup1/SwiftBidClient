@@ -34,7 +34,7 @@ export default function Navigation() {
         {isUserLoggedIN && (
           <>
             <ListItem disablePadding>
-              <ListItemButton onClick={() => navigate(env.routes.home)}>
+              <ListItemButton onClick={() => navigate(env.routes.userprofile)}>
                 <ListItemText primary={"PROFILE"} />
               </ListItemButton>
             </ListItem>
@@ -71,11 +71,6 @@ export default function Navigation() {
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate(env.routes.admin)}>
                 <ListItemText primary={"PENDING APPROVALS"} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton onClick={() => navigate(env.routes.categories)}>
-                <ListItemText primary={"ADD/EDIT CATEGORIES"} />
               </ListItemButton>
             </ListItem>
           </>

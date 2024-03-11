@@ -57,6 +57,7 @@ export default function Base(props: { children: React.ReactNode }) {
           </IconButton>
         </Toolbar>
       </AppBar>
+      <Toolbar />
       {props.children}
       <Drawer
         anchor={"right"}

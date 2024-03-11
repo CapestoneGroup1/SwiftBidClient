@@ -57,3 +57,14 @@ export type ProductDetails = {
   userid: string;
   adminapproval: "APPROVED" | "PENDING" | "REJECTED";
 };
+
+export interface ProfileUpdateData {
+  username: string;
+  email: string;
+  mobile: string;
+  address: string;
+  province: string;
+  city: string;
+  postalcode: string;
+  country: string;
+}

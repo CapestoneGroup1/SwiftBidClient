@@ -10,8 +10,8 @@ import Logout from "../login/Logout";
 import PendingApprovals from "../Admin/PendingApprovals";
 import RoleBasedAccess from "../../components/RoleBasedAccess";
 import AddProduct from "../AddProduct/AddProduct";
+import UserProfile from "../userProfile/userProfile";
 import ShowIfLoggedIn from "../../components/ShowIfLoggedIn";
-import CategoriesList from "../Admin/CategoriesList";
 
 export default function AppRoutes() {
   return (
@@ -40,8 +40,8 @@ export default function AppRoutes() {
           element={<ShowIfLoggedIn element={<AddProduct />} />}
         />
         <Route
-          path={env.routes.categories}
-          element={<RoleBasedAccess element={<CategoriesList />} />}
+          path={env.routes.userprofile}
+          element={<ShowIfLoggedIn element={<UserProfile />} />}
         />
       </Routes>
     </>

@@ -8,7 +8,7 @@ export const env = {
     admin: "admin/",
     home: "/",
     addproduct: "/addproduct",
-    categories: "/categories"
+    userprofile:"/profile"
   },
   api: {
     login: "/auth/login",
@@ -16,12 +16,11 @@ export const env = {
     forgotpassword: "/auth/forgotpassword",
     resetpassword: "/auth/resetpassword",
     profile: "/user/profile",
+    updateProfile:"/user/profile",
     pendingapprovals: "/product/pendingapproval",
-    approveproduct: "/admin/product/approveproduct",
-    rejectproduct: "/admin/product/rejectproduct",
+    approveproduct: "/product/approveproduct",
+    rejectproduct: "/product/rejectproduct",
     categories: "/category",
-    addcategory: "/category/add",
-    editcategory: "/category/edit",
-    addproduct: "/product/add",
+    addproduct: "/product/add"
   },
 };
