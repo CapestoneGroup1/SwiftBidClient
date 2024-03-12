@@ -64,7 +64,7 @@ export default function Login() {
                     required
                     className="form-input"
                   />
-                  <input type="submit" value="Login" className="btn-login" />
+                  <input type="submit" value="Login" className="btn-login" disabled={isLoading}/>
                   <div className="d-flex justify-content-center forgotpass">
                     <a href={env.routes.forgotpassword}>Forgot Password?</a>
                   </div>
