@@ -12,10 +12,10 @@ import RoleBasedAccess from "../../components/RoleBasedAccess";
 import AddProduct from "../AddProduct/AddProduct";
 import ShowIfLoggedIn from "../../components/ShowIfLoggedIn";
 
-// import UserProducts from "../UserProducts/UserProducts";
 import ProductCompleteInformation from "../ProductCompleteInformation/ProductCompleteInformation";
-// import AllProducts from "../AllProducts/AllProducts";
 import UserProfile from "../userProfile/userProfile";
+import UserProducts from "../UserProducts/UserProducts";
+
 import ProductCategories from "../Admin/ProductCategories";
 import AllProducts from "../AllProducts/AllProducts";
 
@@ -45,10 +45,10 @@ export default function AppRoutes() {
           path={env.routes.addproduct}
           element={<ShowIfLoggedIn element={<AddProduct />} />}
         />
-         {/* <Route
+         <Route
           path={env.routes.myproducts}
           element={<ShowIfLoggedIn element={<UserProducts />} />}
-        /> */}
+        />
          <Route
           path={env.routes.productinfo}
           element={<ShowIfLoggedIn element={<ProductCompleteInformation />} />}
