@@ -1,4 +1,13 @@
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useAppContext } from "./AppWrapper";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +19,22 @@ export default function Navigation() {
 
   return (
     <>
+      {isUserLoggedIN && user && (
+        <Grid container direction="column" style={{padding: 10}}>
+          <Grid item>
+             <Avatar style={{
+              fontSize: '2rem'
+             }}>{user.username.charAt(0)}</Avatar>
+          </Grid>
+          <Grid item>
+             <Typography>{user.email}</Typography>
+          </Grid>
+          <Grid item>
+            <Divider />
+          </Grid>
+        </Grid>
+      )}
+
       <List>
         <ListItem disablePadding>
           <ListItemButton onClick={() => navigate("/")}>
@@ -33,25 +58,40 @@ export default function Navigation() {
 
         {isUserLoggedIN && (
           <>
+            <Divider/>
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate(env.routes.userprofile)}>
                 <ListItemText primary={"PROFILE"} />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding onClick={() => navigate(env.routes.home)}>
+            <ListItem
+              disablePadding
+              onClick={() => navigate(env.routes.allproducts)}
+            >
+              <ListItemButton>
+                <ListItemText primary={"PRODUCTS FOR SALE"} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem
+              disablePadding
+              onClick={() => navigate(env.routes.myproducts)}
+            >
               <ListItemButton>
                 <ListItemText primary={"MY PRODUCTS"} />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding onClick={() => navigate(env.routes.addproduct)}>
+            <ListItem
+              disablePadding
+              onClick={() => navigate(env.routes.addproduct)}
+            >
               <ListItemButton>
                 <ListItemText primary={"ADD PRODUCT"} />
               </ListItemButton>
             </ListItem>
           </>
         )}
-        
-        {isUserLoggedIN && user.role?.toLowerCase() !== "admin" && (
+
+        {/* {isUserLoggedIN && user.role?.toLowerCase() !== "admin" && (
           <>
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate(env.routes.home)}>
@@ -64,13 +104,18 @@ export default function Navigation() {
               </ListItemButton>
             </ListItem>
           </>
-        )}
+        )} */}
         {isUserLoggedIN && user.role?.toLowerCase() === "admin" && (
           <>
             {/* Admin Related Routed */}
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate(env.routes.admin)}>
                 <ListItemText primary={"PENDING APPROVALS"} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate(env.routes.categories)}>
+                <ListItemText primary={"ADD/EDIT CATEGORIES"} />
               </ListItemButton>
             </ListItem>
           </>

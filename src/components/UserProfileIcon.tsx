@@ -7,7 +7,7 @@ export default function UserProfileIcon() {
   const { isUserLoggedIN, user } = useAppContext();
 
   if (isUserLoggedIN && user?.id) {
-    return <Avatar />;
+    return <Avatar>{user.username?.charAt(0)}</Avatar>;
   } else if (!isUserLoggedIN) {
     return <MenuIcon />;
   } else {

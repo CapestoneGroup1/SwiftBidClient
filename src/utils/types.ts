@@ -47,6 +47,9 @@ export type Category = {
   _id: string,
   name: string
 }
+
+export type PRODUCT_STATUS  =  'APPROVED' | 'PENDING' | 'REJECTED'
+
 export type ProductDetails = {
   _id: string;
   name: string;
@@ -55,9 +58,21 @@ export type ProductDetails = {
   imageurl: string;
   category: string;
   userid: string;
-  adminapproval: "APPROVED" | "PENDING" | "REJECTED";
+  adminapproval: PRODUCT_STATUS;
 };
 
+export type ProductBids = {
+  _id: string
+  userid: User
+  productid: ProductDetails
+  bidprice: number
+  date: string
+}
+
+export type NewBid = {
+  productid: string,
+  bidprice: number
+}
 export interface ProfileUpdateData {
   username: string;
   email: string;

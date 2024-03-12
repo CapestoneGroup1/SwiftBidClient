@@ -181,7 +181,7 @@ const AddProduct = () => {
                   <FormHelperText error>{errors.file}</FormHelperText>
                 )}
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} md={3}>
                 <CustomButton
                   type="primary"
                   onClick={handleSubmit}
@@ -189,7 +189,7 @@ const AddProduct = () => {
                   loading={isLoading}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12} md={3}>
                 <Button
                   variant="contained"
                   color="warning"

@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Navigation from "./Navigation";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import UserProfileIcon from "./UserProfileIcon";
 
 type Anchor = "top" | "left" | "bottom" | "right";
@@ -57,8 +57,11 @@ export default function Base(props: { children: React.ReactNode }) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Toolbar />
-      {props.children}
+      {/* <Grid container> */}
+         {/* <Grid item xs={12} style={{width: '100%'}}> */}
+           {props.children}
+         {/* </Grid> */}
+      {/* </Grid> */}
       <Drawer
         anchor={"right"}
         open={state["right"]}

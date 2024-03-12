@@ -164,7 +164,7 @@ export default function PendingApprovals() {
 
   return (
     <>
-      <Grid container direction="column" style={{width: '90vw', margin: 'auto'}}>
+      <Grid container direction="column">
         <Grid item>
           <Typography variant="h6" textAlign='center'>Pending Approval</Typography>
         </Grid>

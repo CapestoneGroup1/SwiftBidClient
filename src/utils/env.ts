@@ -8,7 +8,11 @@ export const env = {
     admin: "admin/",
     home: "/",
     addproduct: "/addproduct",
-    userprofile:"/profile"
+    categories: "/categories",
+    myproducts: "/myproducts",
+    productinfo: "/productinfo/:productid",
+    allproducts: '/allproducts',
+    userprofile: '/profile'
   },
   api: {
     login: "/auth/login",
@@ -16,11 +20,18 @@ export const env = {
     forgotpassword: "/auth/forgotpassword",
     resetpassword: "/auth/resetpassword",
     profile: "/user/profile",
-    updateProfile:"/user/profile",
-    pendingapprovals: "/product/pendingapproval",
-    approveproduct: "/product/approveproduct",
-    rejectproduct: "/product/rejectproduct",
+    pendingapprovals: "/admin/product/pendingapproval",
+    approveproduct: "/admin/product/approveproduct",
+    rejectproduct: "/admin/product/rejectproduct",
     categories: "/category",
-    addproduct: "/product/add"
+    addcategory: "/category/add",
+    editcategory: "/category/edit",
+    addproduct: "/product/add",
+    useruploadedproducts: "/product/userId",
+    productdetailsbyid: "/product/details",
+    productBids: "/bids/product",
+    placenewbid: "/bids",
+    allproducts: "/product",
+    updateProfile: "/user/profile"
   },
 };

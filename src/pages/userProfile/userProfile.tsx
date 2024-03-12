@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -10,39 +10,39 @@ import {
   Grid,
   Paper,
 } from "@mui/material";
-import {useUpdateProfile } from "../../api/profile";
+import { useUpdateProfile } from "../../api/profile";
 import CustomButton from "../../components/common/CustomButton";
 import { useAppContext } from "../../components/AppWrapper";
-import {ProfileUpdateData} from '../../utils/types'
+import { ProfileUpdateData } from "../../utils/types";
 type FormState = {
-    username:string;
-    email: string;
-    mobile: string;
-    address: string;
-    province: string;
-    city: string;
-    postalcode: string;
-    country: string;
+  username: string;
+  email: string;
+  mobile: string;
+  address: string;
+  province: string;
+  city: string;
+  postalcode: string;
+  country: string;
 };
 
 const UserProfile = () => {
-    const { isUserLoggedIN, user } = useAppContext();
+  const { isUserLoggedIN, user } = useAppContext();
   const [formData, setFormData] = useState<FormState>({
-    username: user.username,
-    email: user.email,
-    mobile: user.mobile,
-    address: user.address,
-    province: user.province,
-    city: user.city,
-    postalcode: user.postalcode,
-    country: user.country
+    username: user.username || "",
+    email: user.email || "",
+    mobile: user.mobile || "",
+    address: user.address || "",
+    province: user.province || "",
+    city: user.city || "",
+    postalcode: user.postalcode || "",
+    country: user.country || "",
   });
-  
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleClear = () => {
-    setFormData({
+  useEffect(() => {
+    if (user) {
+      setFormData({
         username: user.username,
         email: user.email,
         mobile: user.mobile,
@@ -50,7 +50,21 @@ const UserProfile = () => {
         province: user.province,
         city: user.city,
         postalcode: user.postalcode,
-        country: user.country
+        country: user.country,
+      });
+    }
+  }, [user]);
+
+  const handleClear = () => {
+    setFormData({
+      username: user.username,
+      email: user.email,
+      mobile: user.mobile,
+      address: user.address,
+      province: user.province,
+      city: user.city,
+      postalcode: user.postalcode,
+      country: user.country,
     });
     setErrors({});
   };
@@ -61,8 +75,6 @@ const UserProfile = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
-
-
 
   const handleSubmit = () => {
     const errors = validateForm(formData);
@@ -77,8 +89,8 @@ const UserProfile = () => {
         postalcode: formData.postalcode,
         country: formData.country,
       };
-  
-      updateProfile(jsonData); 
+
+      updateProfile(jsonData);
     } else {
       setErrors(errors);
     }
@@ -86,28 +98,43 @@ const UserProfile = () => {
 
   const validateForm = (formData: FormState) => {
     const errors: { [key: string]: string } = {};
+
     if (!formData.email) {
       errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Invalid email format";
     }
+
     if (!formData.mobile) {
       errors.mobile = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(formData.mobile)) {
+      errors.mobile = "Invalid mobile number";
     }
+
     if (!formData.address) {
       errors.address = "Address is required";
     }
+
     if (!formData.province) {
       errors.province = "Province is required";
     }
+
     if (!formData.city) {
       errors.city = "City is required";
     }
+
     if (!formData.postalcode) {
-        errors.postalcode = "Postalcode is required";
-      }
+      errors.postalcode = "Postal code is required";
+    } else if (
+      !/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/.test(formData.postalcode)
+    ) {
+      errors.postalcode = "Invalid postal code format";
+    }
+
     if (!formData.country) {
-        errors.country = "Conutry is required";
-      }
-    // Additional file validation can be added here
+      errors.country = "Country is required";
+    }
+
     return errors;
   };
 
@@ -119,7 +146,7 @@ const UserProfile = () => {
           <form onSubmit={handleSubmit} noValidate>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   label="UserName"
                   variant="standard"
                   name="username"
@@ -130,6 +157,8 @@ const UserProfile = () => {
                   fullWidth
                   inputProps={{ readOnly: true }}
                 />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
                   label="Email"
                   variant="standard"
@@ -195,16 +224,16 @@ const UserProfile = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-              <TextField
-              label="Postal Code"
-              variant="standard"
-              name="postalcode" 
-              value={formData.postalcode}
-              onChange={handleChange}
-              error={Boolean(errors.postalcode)}
-              helperText={errors.postalcode}
-              fullWidth
-              required
+                <TextField
+                  label="Postal Code"
+                  variant="standard"
+                  name="postalcode"
+                  value={formData.postalcode}
+                  onChange={handleChange}
+                  error={Boolean(errors.postalcode)}
+                  helperText={errors.postalcode}
+                  fullWidth
+                  required
                 />
               </Grid>
               <Grid item xs={12}>

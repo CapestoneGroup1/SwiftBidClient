@@ -12,6 +12,6 @@ export default function ShowIfLoggedIn(props: ShowIfLoggedInProps) {
   if (isUserLoggedIN) {
     return <>{props.element}</>;
   } else {
-    return <Navigate to="/" replace />;
+    return <></>;
   }
 }

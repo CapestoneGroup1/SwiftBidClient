@@ -10,8 +10,12 @@ import Logout from "../login/Logout";
 import PendingApprovals from "../Admin/PendingApprovals";
 import RoleBasedAccess from "../../components/RoleBasedAccess";
 import AddProduct from "../AddProduct/AddProduct";
-import UserProfile from "../userProfile/userProfile";
 import ShowIfLoggedIn from "../../components/ShowIfLoggedIn";
+import CategoriesList from "../Admin/CategoriesList";
+// import UserProducts from "../UserProducts/UserProducts";
+import ProductCompleteInformation from "../ProductCompleteInformation/ProductCompleteInformation";
+// import AllProducts from "../AllProducts/AllProducts";
+import UserProfile from "../userProfile/userProfile";
 
 export default function AppRoutes() {
   return (
@@ -39,7 +43,23 @@ export default function AppRoutes() {
           path={env.routes.addproduct}
           element={<ShowIfLoggedIn element={<AddProduct />} />}
         />
-        <Route
+         {/* <Route
+          path={env.routes.myproducts}
+          element={<ShowIfLoggedIn element={<UserProducts />} />}
+        /> */}
+         <Route
+          path={env.routes.productinfo}
+          element={<ShowIfLoggedIn element={<ProductCompleteInformation />} />}
+        />
+         {/* <Route
+          path={env.routes.allproducts}
+          element={<ShowIfLoggedIn element={<AllProducts />} />}
+        /> */}
+        {/* <Route
+          path={env.routes.categories}
+          element={<RoleBasedAccess element={<CategoriesList />} />}
+        /> */}
+         <Route
           path={env.routes.userprofile}
           element={<ShowIfLoggedIn element={<UserProfile />} />}
         />
