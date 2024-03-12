@@ -43,29 +43,29 @@ const UserProfile = () => {
   useEffect(() => {
     if (user) {
       setFormData({
-        username: user.username,
-        email: user.email,
-        mobile: user.mobile,
-        address: user.address,
-        province: user.province,
-        city: user.city,
-        postalcode: user.postalcode,
-        country: user.country,
+        username: user.username || "",
+        email: user.email || "",
+        mobile: user.mobile || "",
+        address: user.address || "",
+        province: user.province || "",
+        city: user.city || "",
+        postalcode: user.postalcode || "",
+        country: user.country || "",
       });
     }
   }, [user]);
 
   const handleClear = () => {
-    setFormData({
-      username: user.username,
-      email: user.email,
-      mobile: user.mobile,
-      address: user.address,
-      province: user.province,
-      city: user.city,
-      postalcode: user.postalcode,
-      country: user.country,
-    });
+    // setFormData({
+    //   username: user.username,
+    //   email: user.email,
+    //   mobile: user.mobile,
+    //   address: user.address,
+    //   province: user.province,
+    //   city: user.city,
+    //   postalcode: user.postalcode,
+    //   country: user.country,
+    // });
     setErrors({});
   };
 
@@ -87,7 +87,7 @@ const UserProfile = () => {
         province: formData.province,
         city: formData.city,
         postalcode: formData.postalcode,
-        country: formData.country,
+        country: formData.country || "",
       };
 
       updateProfile(jsonData);
