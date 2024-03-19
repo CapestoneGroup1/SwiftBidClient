@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAppContext } from "./AppWrapper";
+import Login from "../pages/login/Login";
 
 type ShowIfLoggedInProps = {
   element: React.ReactNode;
@@ -12,6 +13,8 @@ export default function ShowIfLoggedIn(props: ShowIfLoggedInProps) {
   if (isUserLoggedIN) {
     return <>{props.element}</>;
   } else {
-    return <></>;
+    return <>
+      <Login/>
+    </>;
   }
 }

@@ -15,12 +15,12 @@ export default function AllProducts() {
         <Grid item display={'flex'} justifyContent='center'>
             <Typography variant="h6">Products for sale</Typography>
         </Grid>
-        <Grid item xs={12} container spacing={2}>
+        <Grid item xs={12} container spacing={2} justifyContent='center'>
           {data?.map((product) => {
             return (
               <>
-                <Grid item xs={12} sm={6} md={6} lg={3} key={product._id}>
-                  <Paper style={{ padding: 5 }}>
+                <Grid item xs={10} sm={6} md={3} lg={2} key={product._id}>
+                  <Paper style={{ padding: 5 }} elevation={10}>
                     <Grid container direction="column" spacing={2}>
                       <Grid item xs={12}>
                         <ProductStatus status={product.adminapproval} />
@@ -29,7 +29,7 @@ export default function AllProducts() {
                         <img
                           style={{
                             width: "100%",
-                            height: "15rem",
+                            height: "5rem",
                             objectFit: "contain",
                           }}
                           src={product.imageurl}

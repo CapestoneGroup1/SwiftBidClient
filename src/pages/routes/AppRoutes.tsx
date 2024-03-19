@@ -18,12 +18,16 @@ import UserProducts from "../UserProducts/UserProducts";
 
 import ProductCategories from "../Admin/ProductCategories";
 import AllProducts from "../AllProducts/AllProducts";
+import DeclareWinners from "../Admin/DeclareWinners";
+import UserWinnings from "../AllProducts/UserWinnings";
+import UserWishList from "../AllProducts/UserWishList";
+import SwiftBidHome from "../Home/SwiftBidHome";
 
 export default function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<ShowIfLoggedIn element={<SwiftBidHome />} />}/>
         <Route
           path={env.routes.login}
           element={<HideIfLoggedIN element={<Login />} />}
@@ -45,23 +49,35 @@ export default function AppRoutes() {
           path={env.routes.addproduct}
           element={<ShowIfLoggedIn element={<AddProduct />} />}
         />
-         <Route
+        <Route
           path={env.routes.myproducts}
           element={<ShowIfLoggedIn element={<UserProducts />} />}
         />
-         <Route
+        <Route
           path={env.routes.productinfo}
           element={<ShowIfLoggedIn element={<ProductCompleteInformation />} />}
         />
-         <Route
+        <Route
           path={env.routes.allproducts}
           element={<ShowIfLoggedIn element={<AllProducts />} />}
+        />
+        <Route
+          path={env.routes.winnings}
+          element={<ShowIfLoggedIn element={<UserWinnings />} />}
+        />
+        <Route
+          path={env.routes.wishlist}
+          element={<ShowIfLoggedIn element={<UserWishList />} />}
         />
         <Route
           path={env.routes.categories}
           element={<RoleBasedAccess element={<ProductCategories />} />}
         />
-         <Route
+        <Route
+          path={env.routes.decalrewinners}
+          element={<RoleBasedAccess element={<DeclareWinners />} />}
+        />
+        <Route
           path={env.routes.userprofile}
           element={<ShowIfLoggedIn element={<UserProfile />} />}
         />

@@ -2,8 +2,15 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useForgotPassword, useResetPassword } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { env } from "../../utils/env";
-import { Col, Container, Row, Stack } from "react-bootstrap";
-import "./forgot.css"; // Import the CSS file
+import {
+  Container,
+  Stack,
+  TextField,
+  Button,
+  Link,
+  Typography,
+} from "@mui/material";
+import AuthPagesWrapper from "../../components/common/AuthPagesWrapper";
 
 export default function ForgotPassword() {
   const [state, setState] = useState({
@@ -66,74 +73,80 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="login-container">
-      <Container>
-        <div className="login-form">
-          <Row className="justify-content-center align-items-center">
-            {/* Image column */}
-            <Col xs={12} md={6} className="image-column">
-              <img src="/logo.png" alt="Login" className="img-fluid" />
-            </Col>
-            {/* Login form column */}
-            <Col xs={12} md={6} className="login-form-column">
-              <h1 className="text-center">Forgot Password</h1>
-              {state.view === "FORGOT_PASSWORD" && (
-                <div>
-                  <form onSubmit={submitSendOtp}>
-                    <Stack gap={3}>
-                      {hasError && error?.error && (
-                        <div className="alert alert-danger error">
-                          {error?.error || "Internal Server Error!!!"}
-                        </div>
-                      )}
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        onChange={onChange}
-                        required
-                        className="form-input"
-                      />
-                      <input type="submit" value="Send OTP" className="btn-login" />
-                      <a href={env.routes.login}>Back to Login</a>
-                    </Stack>
-                  </form>
-                </div>
+    <AuthPagesWrapper title="Reset Password">
+      {state.view === "FORGOT_PASSWORD" && (
+        <Container maxWidth="sm">
+          <form onSubmit={submitSendOtp}>
+            <Stack spacing={3}>
+              {hasError && error?.error && (
+                <Typography variant="body1" color="error">
+                  {error?.error || "Internal Server Error!!!"}
+                </Typography>
               )}
-              {state.view === "RESET_PASSWORD" && (
-                <div>
-                  <form onSubmit={submitResetPassword}>
-                    <Stack gap={3}>
-                      {resetError && resetErrorData?.error && (
-                        <div className="alert alert-danger error">
-                          {resetErrorData?.error || "Internal Server Error!!!"}
-                        </div>
-                      )}
-                      <input
-                        type="number"
-                        name="otp"
-                        placeholder="OTP"
-                        onChange={onChange}
-                        required
-                        className="form-input"
-                      />
-                      <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={onChange}
-                        required
-                        className="form-input"
-                      />
-                      <input type="submit" value="ResetPassword" className="btn-login" />
-                    </Stack>
-                  </form>
-                </div>
+              <TextField
+                type="email"
+                name="email"
+                label="Email"
+                variant="outlined"
+                onChange={onChange}
+                required
+                fullWidth
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isLoading}
+                fullWidth
+              >
+                {isLoading ? "Sending OTP..." : "Send OTP"}
+              </Button>
+              <Link href={env.routes.login}>Back to Login</Link>
+            </Stack>
+          </form>
+        </Container>
+      )}
+      {state.view === "RESET_PASSWORD" && (
+        <Container maxWidth="sm">
+          <Typography color='green'>OTP has been sent to {state.email}</Typography><br/>
+          <form onSubmit={submitResetPassword}>
+            <Stack spacing={3}>
+              {resetError && resetErrorData?.error && (
+                <Typography variant="body1" color="error">
+                  {resetErrorData?.error || "Internal Server Error!!!"}
+                </Typography>
               )}
-            </Col>
-          </Row>
-        </div>
-      </Container>
-    </div>
+              <TextField
+                type="number"
+                name="otp"
+                label="OTP"
+                variant="outlined"
+                onChange={onChange}
+                required
+                fullWidth
+              />
+              <TextField
+                type="password"
+                name="password"
+                label="Password"
+                variant="outlined"
+                onChange={onChange}
+                required
+                fullWidth
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={resetLoading}
+                fullWidth
+              >
+                {resetLoading ? "Resetting Password..." : "Reset Password"}
+              </Button>
+            </Stack>
+          </form>
+        </Container>
+      )}
+    </AuthPagesWrapper>
   );
 }

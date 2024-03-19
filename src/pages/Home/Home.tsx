@@ -7,7 +7,7 @@ import RecentUploads from "./RecentUploads";
 
 export default function Home() {
   return (
-    <>
+    <div style={{width: '100%'}}>
       <HeroBanner />
       <br />
       <div>
@@ -25,6 +25,6 @@ export default function Home() {
       <div>
         <RecentUploads />
       </div>
-    </>
+    </div>
   );
 }

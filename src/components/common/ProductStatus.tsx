@@ -1,8 +1,9 @@
 import { Alert } from "@mui/material";
 import React from "react";
+import { PRODUCT_STATUS } from "../../utils/types";
 
 type ProductStatusProps = {
-  status: "APPROVED" | "REJECTED" | "PENDING";
+  status: PRODUCT_STATUS;
 };
 
 export default function ProductStatus({ status }: ProductStatusProps) {
@@ -22,6 +23,12 @@ export default function ProductStatus({ status }: ProductStatusProps) {
     return (
       <Alert variant="outlined" severity="error">
         Rejected
+      </Alert>
+    );
+  } else if (status === "SOLD") {
+    return (
+      <Alert variant="outlined" severity="success">
+        SOLD
       </Alert>
     );
   } else {

@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = {
   name: string;
-  type?: "primary" | "error";
+  type?: "primary" | "error" | "success" | "warning";
   loading?: boolean;
   onClick: () => void;
   disabled?: boolean

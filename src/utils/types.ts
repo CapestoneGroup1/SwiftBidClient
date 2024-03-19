@@ -48,7 +48,7 @@ export type Category = {
   name: string
 }
 
-export type PRODUCT_STATUS  =  'APPROVED' | 'PENDING' | 'REJECTED'
+export type PRODUCT_STATUS  =  'APPROVED' | 'PENDING' | 'REJECTED' | 'SOLD' | 'EXPIRED'
 
 export type ProductDetails = {
   _id: string;
@@ -58,6 +58,7 @@ export type ProductDetails = {
   imageurl: string;
   category: string;
   userid: string;
+  bidenddate: string;
   adminapproval: PRODUCT_STATUS;
 };
 

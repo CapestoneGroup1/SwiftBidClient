@@ -4,20 +4,20 @@ import APIService from "../services/Api";
 import { ErrorResponse } from "../utils/types";
 import { AxiosError } from "axios";
 
-export const useLazyFetch = <TData>(url: string, skip = false) => {
+export const useLazyFetch = <TData>(url = '', skip = false) => {
   const [data, setData] = useState<TData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState<ErrorResponse | null>(null);
 
-  const fetchData = async () => {
-    if (skip || !url) return;
+  const fetchData = async (localUrl?: string) => {
+    if (skip || !(localUrl || url)) return;
     setIsLoading(true);
     setData(null);
     setHasError(false);
     setError(null);
     try {
-      const response = await APIService.getInstance().get<TData>(url);
+      const response = await APIService.getInstance().get<TData>(localUrl || url);
       if (`${response.status}`.startsWith("2")) {
         setData(response.data);
         setHasError(false);

@@ -32,7 +32,7 @@ export default function AppInitialisations(props: {
     /**
      * Check token on every page refresh.
      */
-    const tokenValue = localStorage.token || token;
+    const tokenValue = localStorage.token;
     if (!tokenValue) {
       return dispatch(logoutDispatchAction());
     }

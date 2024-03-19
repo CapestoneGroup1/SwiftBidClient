@@ -2,8 +2,18 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Navigation from "./Navigation";
-import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Grid,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import UserProfileIcon from "./UserProfileIcon";
+import logo from "../assets/images/logo.png";
+import NavLogo from "./common/NavLogo";
+import TopNavBar from "./common/TopNavBar";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -39,28 +49,44 @@ export default function Base(props: { children: React.ReactNode }) {
       <Navigation />
     </Box>
   );
-
   return (
     <div>
       <AppBar position="relative">
-        <Toolbar style={{backgroundColor: '#3363ff'}}>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+        <Toolbar style={{ backgroundColor: "#0099ff" }}>
+          <NavLogo />
+          <Typography
+            noWrap
+            component="div"
+            sx={{
+              flexGrow: 1,
+            }}
+          >
             SwiftBid
           </Typography>
+          <Hidden smDown>
+            <Box
+              sx={{
+                flexGrow: 1,
+              }}
+            >
+              <TopNavBar />
+            </Box>
+          </Hidden>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="end"
             onClick={toggleDrawer("right", true)}
+            style={{marginLeft: '10px'}}
           >
             <UserProfileIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
       {/* <Grid container> */}
-         {/* <Grid item xs={12} style={{width: '100%'}}> */}
-           {props.children}
-         {/* </Grid> */}
+      {/* <Grid item xs={12} style={{width: '100%'}}> */}
+      {props.children}
+      {/* </Grid> */}
       {/* </Grid> */}
       <Drawer
         anchor={"right"}

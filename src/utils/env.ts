@@ -6,13 +6,16 @@ export const env = {
     forgotpassword: "/forgotpassword",
     logout: "/logout",
     admin: "admin/",
+    decalrewinners: "/decalrewinners",
     home: "/",
     addproduct: "/addproduct",
     categories: "/categories",
     myproducts: "/myproducts",
+    winnings: "/winnings",
+    wishlist: "/wishlist",
     productinfo: "/productinfo/:productid",
-    allproducts: '/allproducts',
-    userprofile: '/profile'
+    allproducts: "/allproducts",
+    userprofile: "/profile",
   },
   api: {
     login: "/auth/login",
@@ -32,6 +35,10 @@ export const env = {
     productBids: "/bids/product",
     placenewbid: "/bids",
     allproducts: "/product",
-    updateProfile: "/user/profile"
+    updateProfile: "/user/profile",
+    bidendproducts: "/admin/product/bidend",
+    declarewinners: "/admin/product/declarewinners",
+    userwinnings: "/user/winnings",
+    userwishlist: "/user/wishlist",
   },
 };

@@ -18,6 +18,8 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CustomButton from "../../components/common/CustomButton";
+import { Category } from "../../utils/types";
+import BackgroundWrapper from "../../components/common/BackgroundWrapper";
 
 function ProductDetails(props: { product: Product, onAction: (productId: string) => void }) {
   const [open, setOpen] = React.useState(false);
@@ -41,12 +43,12 @@ function ProductDetails(props: { product: Product, onAction: (productId: string)
 
   const {
     name,
-    category,
+    category = {} as Category,
     userid: user,
     price,
     description,
     imageurl,
-  } = props.product;
+  } = props.product || {};
 
   const userDetails = [
     { label: "Name", value: user.username },
@@ -59,7 +61,7 @@ function ProductDetails(props: { product: Product, onAction: (productId: string)
 
   const productDetails = [
     { label: "Name", value: name },
-    { label: "Category", value: category.name },
+    { label: "Category", value: category?.name },
     { label: "Price", value: price },
     { label: "Description", value: description },
     { label: "Image", value: imageurl },
@@ -80,7 +82,7 @@ function ProductDetails(props: { product: Product, onAction: (productId: string)
         <TableCell component="th" scope="row">
           {name}
         </TableCell>
-        <TableCell align="right">{category.name}</TableCell>
+        <TableCell align="right">{category?.name}</TableCell>
         <TableCell align="right">{price}</TableCell>
       </TableRow>
       <TableRow>

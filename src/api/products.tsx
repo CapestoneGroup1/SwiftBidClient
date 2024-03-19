@@ -30,9 +30,9 @@ export const useAddNewProduct = (successCallback: Function) => {
     } else if (hasError) {
       error(errorMessage?.error || "Failed to Add Product");
     }
-  }, [data]);
+  }, [data, hasError]);
 
-  return { data, error, hasError, isLoading, postData };
+  return { data, errorMessage, hasError, isLoading, postData };
 };
 
 export const useAddNewCategory = (successCallback: Function) => {
