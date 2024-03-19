@@ -54,7 +54,7 @@ const UserProfile = () => {
     dispatch(
       profileDispatchAction({
         ...user,
-        formData,
+        ...formData,
       } as User)
     );
     setCanEdit(false);

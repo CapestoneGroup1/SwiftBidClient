@@ -27,7 +27,7 @@ export default function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<ShowIfLoggedIn element={<SwiftBidHome />} />}/>
+        <Route path="/" element={<SwiftBidHome />}/>
         <Route
           path={env.routes.login}
           element={<HideIfLoggedIN element={<Login />} />}
