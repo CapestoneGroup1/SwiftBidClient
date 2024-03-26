@@ -27,7 +27,7 @@ export default function Navigation() {
                 fontSize: "2rem",
               }}
             >
-              {user.username.charAt(0)}
+              {user?.username?.charAt(0)}
             </Avatar>
           </Grid>
           <Grid item>
