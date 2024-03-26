@@ -9,6 +9,7 @@ import {
   User,
 } from "../utils/types";
 import useFetch from "../hooks/useFetch";
+import { useLazyFetch } from "../hooks/useLazyFetch";
 
 export interface UserWinnings {
   _id: string;
@@ -16,7 +17,26 @@ export interface UserWinnings {
   productid: ProductDetails;
   bidprice: string;
   date: string;
-  paymentcompleted: boolean
+  paymentcompleted: boolean;
+  transactionId: string
+}
+export interface AddNewCreditCard {
+  name: string;
+  number: string;
+  exp_month: string;
+  exp_year: string;
+  cvc: string;
+  address_country: string;
+  address_zip: string;
+  testCardToken?: string;
+}
+export interface CardDetails {
+  cardId: string;
+  number: string;
+  exp_month: number;
+  exp_year: number;
+  name: string;
+  brand: string;
 }
 
 export const useUpdateProfile = (successCallback: Function) => {
@@ -36,22 +56,103 @@ export const useUpdateProfile = (successCallback: Function) => {
     } else if (hasError) {
       error(errorMessage?.error || "Failed to Update profile");
     }
-  }, [data]);
+  }, [data, hasError]);
 
   return { data, error, hasError, isLoading, postData };
 };
 
 export const useGetUserWinnings = () => {
-  const { data, error, hasError, isLoading, refetch } = useFetch<UserWinnings[]>(
-    env.api.userwinnings
-  );
+  const { data, error, hasError, isLoading, refetch } = useFetch<
+    UserWinnings[]
+  >(env.api.userwinnings);
   return { data, error, hasError, isLoading, refetch };
 };
 
 
+export const useGetProfile = () => {
+  const { data, error, hasError, isLoading, fetchData } = useLazyFetch<
+    User
+  >(env.api.profile);
+  return { data, error, hasError, isLoading, fetchData };
+};
+
 export const useGetUserWishList = () => {
-  const { data, error, hasError, isLoading, refetch } = useFetch<ProductDetails[]>(
-    env.api.userwishlist
+  const { data, error, hasError, isLoading, refetch } = useFetch<
+    ProductDetails[]
+  >(env.api.userwishlist);
+  return { data, error, hasError, isLoading, refetch };
+};
+
+export const useGetUserSavedCards = () => {
+  const { data, error, hasError, isLoading, refetch } = useFetch<CardDetails[]>(
+    env.api.savedcards
   );
   return { data, error, hasError, isLoading, refetch };
+};
+
+export const useAddNewCard = (successCallback?: Function) => {
+  const {
+    data,
+    error: errorMessage,
+    hasError,
+    isLoading,
+    postData,
+  } = useCustomMutation<AddNewCreditCard, CardDetails>(env.api.addnewcard);
+  const { success, error } = useCustomNotifications();
+
+  useEffect(() => {
+    if (data && data.cardId) {
+      success("New Card Addedd Successfully");
+      successCallback && successCallback();
+    } else if (hasError) {
+      error(errorMessage?.error || "Failed to Save Card Details");
+    }
+  }, [data, hasError]);
+
+  return { data, error, hasError, isLoading, postData };
+};
+
+export const useSetCardAsPrimary = (successCallback?: Function) => {
+  const {
+    data,
+    error: errorMessage,
+    hasError,
+    isLoading,
+    postData,
+  } = useCustomMutation<any, { cardId: string }>(env.api.setprimary);
+  const { success, error } = useCustomNotifications();
+
+  useEffect(() => {
+    if (data && data.cardId) {
+      success("Active Cart has been Reset Successfully.");
+      successCallback && successCallback();
+    } else if (hasError) {
+      error(errorMessage?.error || "Failed to Reset Active Card");
+    }
+  }, [data, hasError]);
+
+  return { data, error, hasError, isLoading, postData };
+};
+
+
+export const useDeleteCard = (successCallback?: Function) => {
+  const {
+    data,
+    error: errorMessage,
+    hasError,
+    isLoading,
+    postData,
+  } = useCustomMutation<any, { cardId: string }>(env.api.deletecard);
+  const { success, error } = useCustomNotifications();
+
+  useEffect(() => {
+    if (data && data.cardId) {
+      success("Card Has been Deleted Successfully");
+      successCallback && successCallback();
+    } else if (hasError) {
+      error(errorMessage?.error || "Failed to Reset Active Card");
+    }
+  }, [data, hasError]);
+
+  return { data, error, hasError, isLoading, postData };
 };

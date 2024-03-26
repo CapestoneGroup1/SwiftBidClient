@@ -16,6 +16,7 @@ export const env = {
     productinfo: "/productinfo/:productid",
     allproducts: "/allproducts",
     userprofile: "/profile",
+    savedcards: "/savedcards"
   },
   api: {
     login: "/auth/login",
@@ -40,5 +41,9 @@ export const env = {
     declarewinners: "/admin/product/declarewinners",
     userwinnings: "/user/winnings",
     userwishlist: "/user/wishlist",
+    addnewcard: "/user/addnewcard",
+    savedcards: "/user/savedcards",
+    setprimary: "/user/setprimarycard",
+    deletecard: "/user/deletecard",
   },
 };

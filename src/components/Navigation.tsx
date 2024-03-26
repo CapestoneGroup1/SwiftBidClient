@@ -20,7 +20,7 @@ export default function Navigation() {
   return (
     <>
       {isUserLoggedIN && user && (
-        <Grid container direction="column" style={{ padding: 10 }}>
+        <Grid container direction="column" style={{ padding: 10 }} spacing={1}>
           <Grid item>
             <Avatar
               style={{
@@ -103,6 +103,11 @@ export default function Navigation() {
             >
               <ListItemButton>
                 <ListItemText primary={"MY BIDS"} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate(env.routes.savedcards)}>
+                <ListItemText primary={"PAYMENT CARDS"} />
               </ListItemButton>
             </ListItem>
           </>

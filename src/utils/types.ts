@@ -16,6 +16,7 @@ export type User = {
   city: string;
   postalcode: string;
   country: string;
+  primaryCard: string
 };
 
 export interface AppContextState {

@@ -22,6 +22,7 @@ import DeclareWinners from "../Admin/DeclareWinners";
 import UserWinnings from "../AllProducts/UserWinnings";
 import UserWishList from "../AllProducts/UserWishList";
 import SwiftBidHome from "../Home/SwiftBidHome";
+import PaymentCards from "../userProfile/PaymentCards";
 
 export default function AppRoutes() {
   return (
@@ -80,6 +81,10 @@ export default function AppRoutes() {
         <Route
           path={env.routes.userprofile}
           element={<ShowIfLoggedIn element={<UserProfile />} />}
+        />
+        <Route
+          path={env.routes.savedcards}
+          element={<ShowIfLoggedIn element={<PaymentCards />} />}
         />
       </Routes>
     </>
