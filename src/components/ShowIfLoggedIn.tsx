@@ -8,9 +8,9 @@ type ShowIfLoggedInProps = {
 };
 
 export default function ShowIfLoggedIn(props: ShowIfLoggedInProps) {
-  const { isUserLoggedIN } = useAppContext();
+  const { isUserLoggedIN, token } = useAppContext();
 
-  if (isUserLoggedIN) {
+  if (token || isUserLoggedIN) {
     return <>{props.element}</>;
   } else {
     return <>

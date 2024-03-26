@@ -13,7 +13,7 @@ export const useCustomMutation = <TRequest, TResponse>(
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState<ErrorResponse | null>();
 
-  const postData = async (data: TRequest) => {
+  const postData = async (data: TRequest, localUrl?: string) => {
     if (skip) return;
     setIsLoading(true);
     setData(null);
@@ -21,7 +21,7 @@ export const useCustomMutation = <TRequest, TResponse>(
     setError(null);
     try {
       const response = await APIService.getInstance().post<TResponse>(
-        url,
+        localUrl || url,
         data
       );
       if (`${response.status}`.startsWith("2")) {

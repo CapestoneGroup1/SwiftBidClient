@@ -1,11 +1,12 @@
 import React from "react";
 import { useGetUserWinnings } from "../../api/profile";
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Alert, Button, Grid, Paper, Typography } from "@mui/material";
 import ProductStatus from "../../components/common/ProductStatus";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/common/CustomButton";
 import BackgroundWrapper from "../../components/common/BackgroundWrapper";
 import ProductThumbnails from "../../components/common/ProductThumbnail";
+import PageDescription from "../../components/common/PageDescription";
 
 export default function UserWinnings() {
   const { data } = useGetUserWinnings();
@@ -13,31 +14,11 @@ export default function UserWinnings() {
 
   return (
     <BackgroundWrapper>
+      <PageDescription title="Winnings" caption="Track all your Winnings" />
       <Grid container alignItems="center">
-        <Grid item container justifyContent="center">
-          <Grid item display="flex" flexDirection="column" alignItems="center">
-            <Typography
-              variant="h6"
-              style={{ color: "white", fontSize: "2.25rem" }}
-            >
-              Winnings
-            </Typography>
-            <Typography
-              variant="caption"
-              style={{
-                color: "white",
-                fontSize: "0.8rem",
-                textAlign: "center",
-              }}
-            >
-              Track all your Winnings
-            </Typography>
-            <br/>
-          </Grid>
-        </Grid>
-        <Grid container item xs={10} justifyContent='center'>
+        <Grid container item xs={10} justifyContent="center" spacing={2}>
           {data?.map((obj) => {
-            const { productid: product, paymentcompleted } = obj;
+            const { productid: product, paymentcompleted, transactionId } = obj;
             return (
               <Grid item xs={12} sm={4} md={4} lg={3} key={product._id}>
                 <Paper style={{ padding: 5 }}>
@@ -67,9 +48,18 @@ export default function UserWinnings() {
                             navigate("/productinfo/" + product._id)
                           }
                         >
-                          Details
+                          Product Details
                         </Button>
                       </Grid>
+                      {paymentcompleted && (
+                        <>
+                          <Grid item>
+                            <Typography color='green'>
+                              TransactionID: {transactionId}
+                            </Typography>
+                          </Grid>
+                        </>
+                      )}
                       {!paymentcompleted && (
                         <Grid item>
                           <CustomButton

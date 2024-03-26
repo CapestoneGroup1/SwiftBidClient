@@ -89,7 +89,7 @@ export default function ProductThumbnails(props: {
                               navigate("/productinfo/" + product._id)
                             }
                           >
-                            {props.isWhishList ? 'Continue Bidding' : 'Bid'}
+                            {props.isWhishList ? 'Details' : 'Bid'}
                           </Button>
                         </Grid>
                         {props.showEdit &&

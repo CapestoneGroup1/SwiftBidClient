@@ -11,6 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import BackgroundWrapper from "../../components/common/BackgroundWrapper";
+import PageDescription from "../../components/common/PageDescription";
 
 export default function DeclareWinners() {
   const [bidenddate, setBidEndDate] = useState<Dayjs | null>(dayjs());
@@ -31,11 +32,7 @@ export default function DeclareWinners() {
         spacing={2}
         style={{ width: "90vw", margin: "auto" }}
       >
-        <Grid item display={"flex"} justifyContent={"center"}>
-          <Typography variant="h6" style={{ color: "white" }}>
-            Declare Winners
-          </Typography>
-        </Grid>
+        <PageDescription title="Declare Winners"/>
         <Grid item container spacing={2} alignItems="center">
           <Grid item>
             <DatePicker

@@ -1,41 +1,63 @@
-import React from "react";
-import { Button, Grid, Paper, Typography } from "@mui/material";
-import ProductStatus from "../../components/common/ProductStatus";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Chip, Grid, Paper, Typography } from "@mui/material";
 import { useGetUserWishList } from "../../api/profile";
 import BackgroundWrapper from "../../components/common/BackgroundWrapper";
 import ProductThumbnails from "../../components/common/ProductThumbnail";
+import PageDescription from "../../components/common/PageDescription";
+import { PRODUCT_STATUS } from "../../utils/types";
 
 export default function UserWishList() {
   const { data } = useGetUserWishList();
-  const navigate = useNavigate();
+  const [filters, setFilters] = useState<any>({
+    APPROVED: true,
+    SOLD: false,
+  });
+
+  const modifyFilters = (status: PRODUCT_STATUS) => {
+    setFilters((filter: any) => {
+      return {
+        ...filter,
+        [status]: !filter[status],
+      };
+    });
+  };
+
+  const filteredData = data
+    ? data.filter((product) => {
+        return filters[product.adminapproval];
+      })
+    : [];
 
   return (
     <BackgroundWrapper>
+      <PageDescription
+        title="My Bids"
+        caption="Track all your Biddings on various Products"
+      />
+      <br />
       <Grid container alignItems="center">
-        <Grid item container justifyContent="center">
-          <Grid item display="flex" flexDirection="column" alignItems="center">
-            <Typography
-              variant="h6"
-              style={{ color: "white", fontSize: "2.25rem" }}
-            >
-              My Bids
-            </Typography>
-            <Typography
-              variant="caption"
-              style={{
-                color: "white",
-                fontSize: "0.8rem",
-                textAlign: "center",
-              }}
-            >
-              Track all your Biddings on various Products
-            </Typography>
-          </Grid>
+        <Grid item xs={12} container justifyContent="center" spacing={2}>
+          {[
+            { key: "APPROVED", label: "ONGOING BIDDING" },
+            { key: "SOLD", label: "SOLD OUT" },
+          ].map((obj) => {
+            return (
+              <Grid item>
+                <Chip
+                  label={obj.label}
+                  style={{
+                    backgroundColor: filters[obj.key] ? "green" : "#ede8e1",
+                    color: filters[obj.key] ? "white" : "black",
+                  }}
+                  onClick={() => modifyFilters(obj.key as PRODUCT_STATUS)}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
         <Grid item xs={12}>
           <br />
-          <ProductThumbnails products={data} showStatus isWhishList />
+          <ProductThumbnails products={filteredData || []} showStatus isWhishList />
         </Grid>
       </Grid>
     </BackgroundWrapper>
