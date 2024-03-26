@@ -1,7 +1,12 @@
 import React from "react";
 import wave from "../../assets/images/wave.png";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function BackgroundWrapper(props: any) {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <div
       style={{
@@ -13,7 +18,8 @@ export default function BackgroundWrapper(props: any) {
         src={wave}
         style={{
           width: "100%",
-          height: props.height || 'auto'
+          height: isSmallScreen ? "80vh" : "50vh"
+          // maxHeight: isSmallScreen ? "80vh" : "50vh", // Set maximum height based on screen size
         }}
       />
       <div
@@ -21,7 +27,7 @@ export default function BackgroundWrapper(props: any) {
           position: "absolute",
           top: props.top || 10,
           height: "80vh",
-          width: '100%'
+          width: "100%",
         }}
       >
         {props.children}

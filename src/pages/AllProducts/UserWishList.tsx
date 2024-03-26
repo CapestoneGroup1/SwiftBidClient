@@ -35,7 +35,7 @@ export default function UserWishList() {
         caption="Track all your Biddings on various Products"
       />
       <br />
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" style={{width: '90vw', margin: 'auto'}}>
         <Grid item xs={12} container justifyContent="center" spacing={2}>
           {[
             { key: "APPROVED", label: "ONGOING BIDDING" },
