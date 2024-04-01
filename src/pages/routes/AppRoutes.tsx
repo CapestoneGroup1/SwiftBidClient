@@ -23,12 +23,13 @@ import UserWinnings from "../AllProducts/UserWinnings";
 import UserWishList from "../AllProducts/UserWishList";
 import SwiftBidHome from "../Home/SwiftBidHome";
 import PaymentCards from "../userProfile/PaymentCards";
+import Winners from "../Admin/Winners";
 
 export default function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<SwiftBidHome />}/>
+        <Route path="/" element={<SwiftBidHome />} />
         <Route
           path={env.routes.login}
           element={<HideIfLoggedIN element={<Login />} />}
@@ -77,6 +78,10 @@ export default function AppRoutes() {
         <Route
           path={env.routes.decalrewinners}
           element={<RoleBasedAccess element={<DeclareWinners />} />}
+        />
+        <Route
+          path={env.routes.winners}
+          element={<RoleBasedAccess element={<Winners />} />}
         />
         <Route
           path={env.routes.userprofile}

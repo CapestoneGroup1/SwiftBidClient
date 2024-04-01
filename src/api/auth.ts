@@ -29,6 +29,18 @@ export const useLogin = () => {
   return { data, postData, hasError, error, isLoading };
 };
 
+export const useGoogleLink = () => {
+  const { dispatch } = useAppContext();
+  const loginSuccess = (token: string) => {
+    if (token) {
+      localStorage.setItem("token", token);
+      dispatch(loginDispatchAction(token));
+    }
+  };
+
+  return { loginSuccess };
+};
+
 type SignUpRequest = {
   email: string;
   password: string;

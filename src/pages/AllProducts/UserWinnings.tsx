@@ -1,26 +1,48 @@
-import React from "react";
 import { useGetUserWinnings } from "../../api/profile";
-import { Alert, Button, Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import ProductStatus from "../../components/common/ProductStatus";
-import { useNavigate } from "react-router-dom";
-import CustomButton from "../../components/common/CustomButton";
 import BackgroundWrapper from "../../components/common/BackgroundWrapper";
-import ProductThumbnails from "../../components/common/ProductThumbnail";
 import PageDescription from "../../components/common/PageDescription";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DownloadIcon from "@mui/icons-material/Download";
+import ErrorIcon from "@mui/icons-material/Error";
+import APIService from "../../services/Api";
 
 export default function UserWinnings() {
   const { data } = useGetUserWinnings();
-  const navigate = useNavigate();
+
+  const downloadInvoice = async (transactionId: string) => {
+    try {
+      const response = await APIService.getInstance().get(
+        `/user/invoice/${transactionId}`,
+        { responseType: "blob" }
+      );
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank");
+    } catch (error) {
+      console.error("Error downloading invoice:", error);
+    }
+  };
 
   return (
     <BackgroundWrapper>
       <PageDescription title="Winnings" caption="Track all your Winnings" />
-      <Grid container alignItems="center">
+      <br />
+      <Grid container alignItems="center" justifyContent="center">
         <Grid container item xs={10} justifyContent="center" spacing={2}>
           {data?.map((obj) => {
             const { productid: product, paymentcompleted, transactionId } = obj;
             return (
-              <Grid item xs={12} sm={4} md={4} lg={3} key={product._id}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                md={4}
+                lg={3}
+                key={product._id}
+                style={{ width: "80%" }}
+              >
                 <Paper style={{ padding: 5 }}>
                   <Grid container direction="column" spacing={2}>
                     <Grid item xs={12}>
@@ -28,9 +50,12 @@ export default function UserWinnings() {
                     </Grid>
                     <Grid item>
                       <img
-                        style={{
-                          height: "10rem",
-                          width: "100%",
+                         style={{
+                          height: "5rem",
+                          width: "auto", 
+                          maxHeight: "5rem", 
+                          display: "block",
+                          margin: "0 auto",
                           objectFit: "contain",
                         }}
                         src={product.imageurl}
@@ -38,35 +63,39 @@ export default function UserWinnings() {
                       />
                     </Grid>
                     <Grid item display="flex" justifyContent="center">
-                      <Typography variant="h6">{product.name}</Typography>
+                      <Typography style={{ fontSize: "1.2rem" }}>
+                        {product.name}
+                      </Typography>
                     </Grid>
                     <Grid item container spacing={2} alignItems="center">
-                      <Grid item>
-                        <Button
-                          size="small"
-                          onClick={() =>
-                            navigate("/productinfo/" + product._id)
-                          }
-                        >
-                          Product Details
-                        </Button>
-                      </Grid>
                       {paymentcompleted && (
                         <>
-                          <Grid item>
-                            <Typography color='green'>
-                              TransactionID: {transactionId}
-                            </Typography>
+                          <Grid
+                            item
+                            container
+                            alignItems="center"
+                            spacing={1}
+                            justifyContent="space-between"
+                          >
+                            <Grid item>
+                              <CheckCircleIcon style={{ color: "green" }} />{" "}
+                              <span style={{ color: "green" }}>
+                                PaymentSuccess
+                              </span>
+                            </Grid>
+                            <Grid
+                              item
+                              onClick={() => downloadInvoice(transactionId)}
+                            >
+                              <DownloadIcon style={{ cursor: "pointer" }} />{" "}
+                              Invoice
+                            </Grid>
                           </Grid>
                         </>
                       )}
                       {!paymentcompleted && (
                         <Grid item>
-                          <CustomButton
-                            name="Complete Payment"
-                            type="error"
-                            onClick={() => {}}
-                          />
+                          <ErrorIcon style={{ color: "red" }} /> Payment Pending
                         </Grid>
                       )}
                     </Grid>

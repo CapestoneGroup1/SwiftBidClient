@@ -10,7 +10,7 @@ export default function ProductThumbnails(props: {
   products: ProductDetails[] | null;
   showStatus: boolean;
   showEdit?: boolean;
-  isWhishList?: boolean
+  isWhishList?: boolean;
 }) {
   const { products } = props;
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function ProductThumbnails(props: {
           >
             {products?.map((product) => {
               return (
-                <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
                   <Paper
                     elevation={10}
                     style={{
@@ -47,29 +47,41 @@ export default function ProductThumbnails(props: {
                           src={product.imageurl}
                           alt={product.name}
                           style={{
-                            height: "10rem",
-                            width: "100%",
+                            height: "5rem",
+                            width: "auto", 
+                            maxHeight: "5rem", 
+                            display: "block",
+                            margin: "0 auto",
                             objectFit: "contain",
                           }}
                         />
                       </Grid>
-                      <Grid item display="flex" flexDirection="column">
-                        <Typography
-                          style={{
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {product.name}
-                        </Typography>
-                        <Typography
-                          style={{
-                            color: "green",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          ${product.price}
-                        </Typography>
+                      <Grid item container justifyContent="space-between">
+                        <Grid item display="flex" flexDirection="column">
+                          <Typography
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {product.name}
+                          </Typography>
+                          <Typography
+                            style={{
+                              color: "green",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            ${product.price}
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="body2" color={"green"}>
+                            BidEnd Date:{" "}
+                            {new Date(+product.bidenddate).toDateString()}
+                          </Typography>
+                        </Grid>
                       </Grid>
+
                       <Grid item>
                         <Divider />
                       </Grid>
@@ -89,7 +101,7 @@ export default function ProductThumbnails(props: {
                               navigate("/productinfo/" + product._id)
                             }
                           >
-                            {props.isWhishList ? 'Details' : 'Bid'}
+                            {props.isWhishList ? "Details" : "Bid"}
                           </Button>
                         </Grid>
                         {props.showEdit &&

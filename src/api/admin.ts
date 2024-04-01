@@ -27,6 +27,16 @@ type BidEndProducts = {
   bids: ProductBids[];
 };
 
+type winners = {
+  _id: string;
+  userid: User;
+  productid: Product;
+  bidprice: number;
+  date: string;
+  paymentcompleted: boolean;
+  transactionId: string;
+};
+
 export const usePendingApprovals = () => {
   const { data, error, hasError, isLoading, refetch } = useFetch<Product[]>(
     env.api.pendingapprovals
@@ -87,8 +97,8 @@ export const useGetBidEndProducts = () => {
     hasError,
     isLoading,
     trigger: (bidenddate: string) => {
-      fetchData(env.api.bidendproducts + "/" + bidenddate)
-    }
+      fetchData(env.api.bidendproducts + "/" + bidenddate);
+    },
   };
 };
 
@@ -105,4 +115,11 @@ export const useDeclareWinners = (successCallback?: Function) => {
       successCallback && successCallback();
     },
   };
+};
+
+export const useGetAllWinners = () => {
+  const { data, error, hasError, isLoading, refetch } = useFetch<winners[]>(
+    env.api.winners
+  );
+  return { data, error, hasError, isLoading, refetch };
 };

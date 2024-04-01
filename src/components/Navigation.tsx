@@ -133,6 +133,13 @@ export default function Navigation() {
                 <ListItemText primary={"DECLARE WINNERS"} />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => navigate(env.routes.winners)}
+              >
+                <ListItemText primary={"WINNERS"} />
+              </ListItemButton>
+            </ListItem>
           </>
         )}
 

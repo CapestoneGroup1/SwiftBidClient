@@ -1,13 +1,10 @@
 import { ChangeEvent, useState } from "react";
-import { useLogin } from "../../api/auth";
+import { useGoogleLink, useLogin } from "../../api/auth";
 import { env } from "../../utils/env";
-import {
-  Stack,
-  TextField,
-  Button,
-  Link,
-} from "@mui/material";
+import { Stack, TextField, Button, Link } from "@mui/material";
 import AuthPagesWrapper from "../../components/common/AuthPagesWrapper";
+import google from "../../assets/images/google.png";
+import { handleGoogleSign } from "../../services/firebase";
 
 export default function Login() {
   const [state, setState] = useState({
@@ -15,6 +12,7 @@ export default function Login() {
     password: "",
   });
   const { postData, hasError, error, isLoading } = useLogin();
+  const { loginSuccess } = useGoogleLink();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,6 +30,11 @@ export default function Login() {
       email,
       password,
     });
+  };
+
+  const handleGoogleSignIN = async () => {
+    const token = await handleGoogleSign();
+    if (token) loginSuccess(token);
   };
 
   return (
@@ -69,6 +72,18 @@ export default function Login() {
             >
               {isLoading ? "Logging in..." : "Login"}
             </Button>
+            <div style={{ textAlign: "center" }} onClick={handleGoogleSignIN}>
+              <img
+                src={google}
+                style={{
+                  width: "10rem",
+                  height: "auto",
+                  objectFit: "contain",
+                  cursor: "pointer",
+                }}
+                alt="Google SignIn"
+              />
+            </div>
             <div style={{ textAlign: "center" }}>
               <Link href={env.routes.forgotpassword}>Forgot Password?</Link>
             </div>

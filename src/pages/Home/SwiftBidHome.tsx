@@ -20,10 +20,14 @@ import ProductThumbnails from "../../components/common/ProductThumbnail";
 import BackgroundWrapper from "../../components/common/BackgroundWrapper";
 import PageDescription from "../../components/common/PageDescription";
 import TuneIcon from "@mui/icons-material/Tune";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function SwiftBidHome() {
   const { data: categories } = useGetCategories();
   const { data: products } = useGetAllProducts();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -32,11 +36,18 @@ export default function SwiftBidHome() {
   const [sortDirection, setSortDirection] = useState("asc");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const getPriceRange = (price: number): string => {
-    if (price <= 100) return "Below 100";
-    else if (price <= 200) return "Below 200";
-    else if (price <= 300) return "Below 300";
-    else return "Any";
+  const isPriceRangeIncluded = (price: number): boolean => {
+    if (selectedPrices.includes("Below 300")) {
+      return price <= 300;
+    }
+    if (selectedPrices.includes("Below 200")) {
+      return price <= 200;
+    }
+    if (selectedPrices.includes("Below 100")) {
+      return price <= 100;
+    }
+
+    return true;
   };
 
   const handleCategoryToggle = (categoryId: string) => () => {
@@ -86,9 +97,7 @@ export default function SwiftBidHome() {
         : true
     )
     .filter((obj) =>
-      selectedPrices.length > 0
-        ? selectedPrices.includes(getPriceRange(+obj.price))
-        : true
+      selectedPrices.length > 0 ? isPriceRangeIncluded(+obj.price) : true
     );
 
   let sortedProducts = [...(filteredProducts || [])];
@@ -242,7 +251,9 @@ export default function SwiftBidHome() {
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
         >
-          <div style={{ width: "20vw" }}>{drawerContent}</div>
+          <div style={{ width: isSmallScreen ? "50vw" : "20vw" }}>
+            {drawerContent}
+          </div>
         </Drawer>
       </BackgroundWrapper>
     </>

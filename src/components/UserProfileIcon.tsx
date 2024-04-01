@@ -8,9 +8,7 @@ export default function UserProfileIcon() {
 
   if (isUserLoggedIN && user?.id) {
     return <Avatar>{user?.username?.charAt(0)}</Avatar>;
-  } else if (!isUserLoggedIN) {
-    return <MenuIcon />;
   } else {
-    return <></>;
-  }
+    return <MenuIcon />;
+  } 
 }
