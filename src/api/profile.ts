@@ -156,3 +156,22 @@ export const useDeleteCard = (successCallback?: Function) => {
 
   return { data, error, hasError, isLoading, postData };
 };
+export const getProvinceNames = async () => {
+  try {
+    const response = await fetch('https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-canada-province/records?select=prov_name_en&limit=50');
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch province data');
+    }
+    
+    const data = await response.json();
+    
+  
+    const provinceNames = data.results.map((result: { prov_name_en: any[]; }) => result.prov_name_en[0]);
+    
+    return provinceNames;
+  } catch (error) {
+    console.error('Error fetching province names:', error);
+    return []; 
+  }
+};

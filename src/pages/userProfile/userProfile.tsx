@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Grid, Paper, Typography } from "@mui/material";
+import { TextField, Grid, Paper, Typography, Select,MenuItem, InputLabel, makeStyles } from "@mui/material";
 import { useUpdateProfile } from "../../api/profile";
 import CustomButton from "../../components/common/CustomButton";
 import { useAppContext } from "../../components/AppWrapper";
 import { ProfileUpdateData, User } from "../../utils/types";
 import { profileDispatchAction } from "../../context/ActionCreators";
 import BackgroundWrapper from "../../components/common/BackgroundWrapper";
-
+import { getProvinceNames } from "../../api/profile";
 type FormState = {
   username: string;
   email: string;
@@ -26,14 +26,14 @@ const UserProfile = () => {
     email: user.email || "",
     mobile: user.mobile || "",
     address: user.address || "",
-    province: user.province || "",
+    province: user.province || "Ontario",
     city: user.city || "",
     postalcode: user.postalcode || "",
     country: user.country || "",
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
+  const [provinceNames, setProvinceNames] = useState<string[]>([]);
   useEffect(() => {
     if (user) {
       setFormData({
@@ -48,6 +48,17 @@ const UserProfile = () => {
       });
     }
   }, [user]);
+
+  useEffect(() => {
+    // Fetch province names when component mounts
+    getProvinceNames()
+      .then(names => {
+        setProvinceNames(names);
+      })
+      .catch(error => {
+        console.error('Error fetching province names:', error);
+      });
+  }, []);
 
   const handleClear = () => {
     setErrors({});
@@ -190,7 +201,7 @@ const UserProfile = () => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  {/* <TextField
                     label="province"
                     variant="standard"
                     name="province"
@@ -200,7 +211,28 @@ const UserProfile = () => {
                     helperText={errors.province}
                     fullWidth
                     required
-                  />
+                  /> */}
+                   <InputLabel
+                    id="province-label"
+                    style={{ fontSize: '12px', paddingTop:'5px'}} // Apply inline style to adjust the font size
+                  >
+                    Province<sup style={{ fontSize: '12px' }}>&#42;</sup>
+                  </InputLabel>
+                  <Select
+                  label="province"
+                  name="province"
+                  value={formData.province}
+                  onChange={handleChange}
+                  error={Boolean(errors.province)}
+                  required
+                  style={{ height: '40px' }}
+                >
+                  {provinceNames.map((province, index) => (
+                    <MenuItem key={index} value={province}>
+                      {province}
+                    </MenuItem>
+                  ))}
+                </Select>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
