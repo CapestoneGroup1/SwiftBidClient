@@ -12,9 +12,13 @@ export default function ShowIfLoggedIn(props: ShowIfLoggedInProps) {
 
   if (token || isUserLoggedIN) {
     return <>{props.element}</>;
+  } else if (localStorage.getItem("token")) {
+    return <></>;
   } else {
-    return <>
-      <Login/>
-    </>;
+    return (
+      <>
+        <Login />
+      </>
+    );
   }
 }

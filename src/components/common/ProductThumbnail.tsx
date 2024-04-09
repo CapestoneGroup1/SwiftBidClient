@@ -74,8 +74,8 @@ export default function ProductThumbnails(props: {
                             ${product.price}
                           </Typography>
                         </Grid>
-                        <Grid item>
-                          <Typography variant="body2" color={"green"}>
+                        <Grid item xs={12}>
+                          <Typography variant="body2" >
                             BidEnd Date:{" "}
                             {new Date(+product.bidenddate).toDateString()}
                           </Typography>

@@ -17,7 +17,8 @@ export const env = {
     productinfo: "/productinfo/:productid",
     allproducts: "/allproducts",
     userprofile: "/profile",
-    savedcards: "/savedcards"
+    savedcards: "/savedcards",
+    contact: "/contact"
   },
   api: {
     login: "/auth/login",

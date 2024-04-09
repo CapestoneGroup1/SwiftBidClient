@@ -8,6 +8,8 @@ export default function UserProfileIcon() {
 
   if (isUserLoggedIN && user?.id) {
     return <Avatar>{user?.username?.charAt(0)}</Avatar>;
+  }  else if (localStorage.getItem("token")) {
+    return <></>;
   } else {
     return <MenuIcon />;
   } 

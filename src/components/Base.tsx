@@ -14,10 +14,12 @@ import UserProfileIcon from "./UserProfileIcon";
 import logo from "../assets/images/logo.png";
 import NavLogo from "./common/NavLogo";
 import TopNavBar from "./common/TopNavBar";
+import { useNavigate } from "react-router-dom";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function Base(props: { children: React.ReactNode }) {
+  const navigate = useNavigate()
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -60,6 +62,7 @@ export default function Base(props: { children: React.ReactNode }) {
             sx={{
               flexGrow: 1,
             }}
+            onClick={() => navigate("/")}
           >
             SwiftBid
           </Typography>

@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import AppWrapper from "./components/AppWrapper";
 import AppLayout from "./components/AppLayout";
 import AppInitialisations from "./components/AppInitialisations";

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { useSignUp } from "../../api/auth";
+import { useGoogleLink, useSignUp } from "../../api/auth";
 import { env } from "../../utils/env";
 import {
   Container,
@@ -9,6 +9,8 @@ import {
   Link,
 } from "@mui/material";
 import AuthPagesWrapper from "../../components/common/AuthPagesWrapper";
+import { handleGoogleSign } from "../../services/firebase";
+import google from "../../assets/images/google.png";
 
 export default function Signup() {
   const [state, setState] = useState({
@@ -17,6 +19,7 @@ export default function Signup() {
     username: "",
   });
   const { postData, hasError, error, isLoading } = useSignUp();
+  const { loginSuccess } = useGoogleLink();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,6 +38,11 @@ export default function Signup() {
       password,
       username,
     });
+  };
+
+  const handleGoogleSignIN = async () => {
+    const token = await handleGoogleSign();
+    if (token) loginSuccess(token);
   };
 
   return (
@@ -85,6 +93,18 @@ export default function Signup() {
             </Button>
             <div style={{ textAlign: "center" }}>
               <Link href={env.routes.login}>Already have an account</Link>
+            </div>
+            <div style={{ textAlign: "center" }} onClick={handleGoogleSignIN}>
+              <img
+                src={google}
+                style={{
+                  width: "10rem",
+                  height: "auto",
+                  objectFit: "contain",
+                  cursor: "pointer",
+                }}
+                alt="Google SignIn"
+              />
             </div>
           </Stack>
         </form>

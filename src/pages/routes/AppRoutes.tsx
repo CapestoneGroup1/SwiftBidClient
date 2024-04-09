@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "../Home/Home";
 import { env } from "../../utils/env";
 import HideIfLoggedIN from "../../components/HideIfLoggedIN";
 import Login from "../login/Login";
@@ -24,6 +23,7 @@ import UserWishList from "../AllProducts/UserWishList";
 import SwiftBidHome from "../Home/SwiftBidHome";
 import PaymentCards from "../userProfile/PaymentCards";
 import Winners from "../Admin/Winners";
+import ContactUs from "../Home/ContactUs";
 
 export default function AppRoutes() {
   return (
@@ -90,6 +90,10 @@ export default function AppRoutes() {
         <Route
           path={env.routes.savedcards}
           element={<ShowIfLoggedIn element={<PaymentCards />} />}
+        />
+        <Route
+          path={env.routes.contact}
+          element={<ShowIfLoggedIn element={<ContactUs />} />}
         />
       </Routes>
     </>

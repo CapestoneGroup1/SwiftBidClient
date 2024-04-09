@@ -52,7 +52,7 @@ export default function UserProducts() {
         <Grid item xs={12} container justifyContent="center" spacing={2}>
           {["APPROVED", "PENDING", "REJECTED", "SOLD", "EXPIRED"].map((obj) => {
             return (
-              <Grid item>
+              <Grid item key={obj}>
                 <Chip
                   label={obj}
                   style={{

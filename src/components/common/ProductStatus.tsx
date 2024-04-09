@@ -34,7 +34,7 @@ export default function ProductStatus({ status }: ProductStatusProps) {
   }else if (status === "EXPIRED") {
     return (
       <Alert variant="outlined" severity="info">
-        EXPIRED WITHOUT BIDS
+        EXPIRED
       </Alert>
     );
   } else {
