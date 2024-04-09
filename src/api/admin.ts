@@ -22,6 +22,14 @@ type ApproveRejectProduct = {
   rejectReason?: string;
 };
 
+type Query = {
+  _id?: string
+  name: string;
+  email: string;
+  message: string
+  date?: string
+};
+
 type BidEndProducts = {
   product: Product;
   bids: ProductBids[];
@@ -61,7 +69,7 @@ export const useApproveProduct = (successCallback: Function) => {
     } else if (hasError) {
       error(errorMessage?.error || "Failed to Take Action");
     }
-  }, [data]);
+  }, [data, hasError]);
 
   return { data, error, hasError, isLoading, postData };
 };
@@ -83,7 +91,7 @@ export const useRejectProduct = (successCallback: Function) => {
     } else if (hasError) {
       error(errorMessage?.error || "Failed to Take Action");
     }
-  }, [data]);
+  }, [data, hasError]);
 
   return { data, error, hasError, isLoading, postData };
 };
@@ -122,4 +130,34 @@ export const useGetAllWinners = () => {
     env.api.winners
   );
   return { data, error, hasError, isLoading, refetch };
+};
+
+export const useGetQueries = () => {
+  const { data, error, hasError, isLoading, refetch } = useFetch<Query[]>(
+    env.api.query
+  );
+  return { data, error, hasError, isLoading, refetch };
+};
+
+
+export const useSaveQuery = (successCallback: Function) => {
+  const {
+    data,
+    error: errorMessage,
+    hasError,
+    isLoading,
+    postData,
+  } = useCustomMutation<Query, Query>(env.api.query);
+  const { success, error } = useCustomNotifications();
+
+  useEffect(() => {
+    if (data) {
+      success("Details Sent Successfully");
+      successCallback();
+    } else if (hasError) {
+      error(errorMessage?.error || "Failed to Submit Details");
+    }
+  }, [data, hasError]);
+
+  return { data, error, hasError, isLoading, postData };
 };

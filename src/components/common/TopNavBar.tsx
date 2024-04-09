@@ -1,12 +1,15 @@
 import React from "react";
+import { useAppContext } from "../AppWrapper";
+import { env } from "../../utils/env";
 
 const navItem = {
   color: "white",
-  marginRight: "1rem",
+  marginRight: "2rem",
   textDecoration: "none",
 };
 
 export default function TopNavBar() {
+  const { user } = useAppContext();
   return (
     <nav
       style={{
@@ -18,11 +21,18 @@ export default function TopNavBar() {
       <a href="/" style={navItem}>
         Home
       </a>
-      <a href="aboutus" style={navItem}>
-        About
-      </a>
+      {user && (
+        <>
+          <a href={env.routes.userprofile} style={navItem}>
+            Profile
+          </a>
+          <a href={env.routes.wishlist} style={navItem}>
+            Wishlist
+          </a>
+        </>
+      )}
       <a href="contact" style={navItem}>
-        Contact
+        Contact Us
       </a>
     </nav>
   );

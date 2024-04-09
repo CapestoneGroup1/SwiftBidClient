@@ -1,4 +1,4 @@
-import { Grid, Hidden, Typography } from "@mui/material";
+import { Grid, Hidden, Paper, Typography } from "@mui/material";
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -22,7 +22,10 @@ export default function PageDescription(props: {
         >
           <Typography
             variant="h6"
-            style={{ color: "white", fontSize: isSmallScreen ? '1rem' : "2.25rem" }}
+            style={{
+              color: "white",
+              fontSize: isSmallScreen ? "1rem" : "2.25rem",
+            }}
           >
             {props.title}
           </Typography>

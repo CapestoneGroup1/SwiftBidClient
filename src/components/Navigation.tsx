@@ -140,6 +140,13 @@ export default function Navigation() {
                 <ListItemText primary={"WINNERS"} />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => navigate(env.routes.queries)}
+              >
+                <ListItemText primary={"QUERIES"} />
+              </ListItemButton>
+            </ListItem>
           </>
         )}
 

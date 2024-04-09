@@ -24,6 +24,7 @@ import SwiftBidHome from "../Home/SwiftBidHome";
 import PaymentCards from "../userProfile/PaymentCards";
 import Winners from "../Admin/Winners";
 import ContactUs from "../Home/ContactUs";
+import Queries from "../Admin/Queries";
 
 export default function AppRoutes() {
   return (
@@ -82,6 +83,10 @@ export default function AppRoutes() {
         <Route
           path={env.routes.winners}
           element={<RoleBasedAccess element={<Winners />} />}
+        />
+        <Route
+          path={env.routes.queries}
+          element={<RoleBasedAccess element={<Queries />} />}
         />
         <Route
           path={env.routes.userprofile}
