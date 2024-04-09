@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Grid, Paper, Typography, Select,MenuItem, InputLabel, makeStyles } from "@mui/material";
+import {
+  TextField,
+  Grid,
+  Paper,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  makeStyles,
+} from "@mui/material";
 import { useUpdateProfile } from "../../api/profile";
 import CustomButton from "../../components/common/CustomButton";
 import { useAppContext } from "../../components/AppWrapper";
@@ -52,11 +61,11 @@ const UserProfile = () => {
   useEffect(() => {
     // Fetch province names when component mounts
     getProvinceNames()
-      .then(names => {
+      .then((names) => {
         setProvinceNames(names);
       })
-      .catch(error => {
-        console.error('Error fetching province names:', error);
+      .catch((error) => {
+        console.error("Error fetching province names:", error);
       });
   }, []);
 
@@ -145,7 +154,9 @@ const UserProfile = () => {
       <Grid container justifyContent="center">
         <Grid item xs={12} md={6}>
           <Paper elevation={3} style={{ padding: 20 }}>
-            <Typography variant="h6" className="text-center">Profile Details</Typography>
+            <Typography variant="h6" className="text-center">
+              Profile Details
+            </Typography>
             <form onSubmit={handleSubmit} noValidate>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -212,27 +223,29 @@ const UserProfile = () => {
                     fullWidth
                     required
                   /> */}
-                   <InputLabel
+                  <InputLabel
                     id="province-label"
-                    style={{ fontSize: '12px', paddingTop:'5px'}} // Apply inline style to adjust the font size
+                    style={{ fontSize: "12px", paddingTop: "5px" }} // Apply inline style to adjust the font size
                   >
-                    Province<sup style={{ fontSize: '12px' }}>&#42;</sup>
+                    Province<sup style={{ fontSize: "12px" }}>&#42;</sup>
                   </InputLabel>
                   <Select
-                  label="province"
-                  name="province"
-                  value={formData.province}
-                  onChange={handleChange}
-                  error={Boolean(errors.province)}
-                  required
-                  style={{ height: '40px' }}
-                >
-                  {provinceNames.map((province, index) => (
-                    <MenuItem key={index} value={province}>
-                      {province}
-                    </MenuItem>
-                  ))}
-                </Select>
+                    label="province"
+                    name="province"
+                    variant="standard"
+                    value={formData.province}
+                    onChange={handleChange}
+                    fullWidth
+                    error={Boolean(errors.province)}
+                    required
+                    style={{ height: "40px" }}
+                  >
+                    {provinceNames.map((province, index) => (
+                      <MenuItem key={index} value={province}>
+                        {province}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
