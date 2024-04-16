@@ -3,9 +3,9 @@ import { useAppContext } from "../AppWrapper";
 import { env } from "../../utils/env";
 
 const navItem = {
-  color: "white",
   marginRight: "2rem",
   textDecoration: "none",
+  fontWeight: 500
 };
 
 export default function TopNavBar() {
@@ -16,6 +16,7 @@ export default function TopNavBar() {
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
+        color: '#000000'
       }}
     >
       <a href="/" style={navItem}>

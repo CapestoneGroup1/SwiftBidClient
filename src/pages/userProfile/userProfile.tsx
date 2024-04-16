@@ -50,7 +50,7 @@ const UserProfile = () => {
         email: user.email || "",
         mobile: user.mobile || "",
         address: user.address || "",
-        province: user.province || "",
+        province: user.province || "Ontario",
         city: user.city || "",
         postalcode: user.postalcode || "",
         country: user.country || "",

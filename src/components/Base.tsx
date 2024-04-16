@@ -61,6 +61,8 @@ export default function Base(props: { children: React.ReactNode }) {
             component="div"
             sx={{
               flexGrow: 1,
+              fontSize: '1.2rem',
+              cursor: 'pointer',
             }}
             onClick={() => navigate("/")}
           >
