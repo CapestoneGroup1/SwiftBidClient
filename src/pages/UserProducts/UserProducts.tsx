@@ -71,7 +71,7 @@ export default function UserProducts() {
         <Grid item xs={12}>
           <ProductThumbnails
             showStatus
-            showEdit
+            showEdit={false}
             products={filteredData?.sort((a, b) =>
               a.adminapproval.localeCompare(b.adminapproval)
             )}

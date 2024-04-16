@@ -34,6 +34,7 @@ export default function CategoriesList() {
   const [modalOpen, setModalOpen] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [duplicate, setDuplicate] = useState(false);
 
   const handleAddCategory = () => {
     setCategoryName("");
@@ -54,10 +55,16 @@ export default function CategoriesList() {
   };
 
   const handleSaveCategory = () => {
+    const existing = data?.find(cat => cat.name?.toLowerCase() === categoryName?.toLowerCase().trim())
+    if(existing) {
+      setDuplicate(true);
+      return;
+    }
+    setDuplicate(false);
     if (categoryId) {
-      editCategory({ id: categoryId, name: categoryName });
+      editCategory({ id: categoryId, name: categoryName.trim() });
     } else {
-      addCategory({ name: categoryName });
+      addCategory({ name: categoryName.trim() });
     }
     setModalOpen(false);
   };
@@ -128,6 +135,8 @@ export default function CategoriesList() {
                 value={categoryName}
                 size="medium"
                 fullWidth
+                error={duplicate}
+                helperText={duplicate ? 'Category Already Exists' : ''}
                 onChange={(e) => setCategoryName(e.target.value)}
               />
             </Grid>
@@ -136,6 +145,7 @@ export default function CategoriesList() {
         <DialogActions>
           <CustomButton
             onClick={handleSaveCategory}
+            disabled={!categoryName}
             name="Save"
             loading={editCatLoading || addCatLoading}
           />

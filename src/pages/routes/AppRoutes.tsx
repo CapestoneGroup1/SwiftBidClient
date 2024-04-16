@@ -25,6 +25,7 @@ import PaymentCards from "../userProfile/PaymentCards";
 import Winners from "../Admin/Winners";
 import ContactUs from "../Home/ContactUs";
 import Queries from "../Admin/Queries";
+import CategoriesList from "../Admin/CategoriesList";
 
 export default function AppRoutes() {
   return (
@@ -74,7 +75,7 @@ export default function AppRoutes() {
         />
         <Route
           path={env.routes.categories}
-          element={<RoleBasedAccess element={<ProductCategories />} />}
+          element={<RoleBasedAccess element={<CategoriesList />} />}
         />
         <Route
           path={env.routes.decalrewinners}
