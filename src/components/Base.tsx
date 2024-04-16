@@ -63,6 +63,7 @@ export default function Base(props: { children: React.ReactNode }) {
               flexGrow: 1,
               fontSize: '1.2rem',
               cursor: 'pointer',
+              color: 'white'
             }}
             onClick={() => navigate("/")}
           >

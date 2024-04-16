@@ -5,7 +5,8 @@ import { env } from "../../utils/env";
 const navItem = {
   marginRight: "2rem",
   textDecoration: "none",
-  fontWeight: 500
+  fontWeight: 500,
+  color: 'white'
 };
 
 export default function TopNavBar() {
@@ -16,7 +17,7 @@ export default function TopNavBar() {
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
-        color: '#000000'
+        color: 'white'
       }}
     >
       <a href="/" style={navItem}>
